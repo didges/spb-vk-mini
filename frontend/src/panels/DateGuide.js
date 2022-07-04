@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar, PanelHeaderBack} from '@vkontakte/vkui';
-import persik from "../img/persik.png";
+import axios from "axios";
 
 export default function DateGuide(props) {
+    useEffect(() => {
+        axios.post('http://localhost:5000/hi').then(r => console.log(r.data));
+    })
+
     return (
         <Panel id={props.id}>
             <PanelHeader
@@ -14,6 +18,5 @@ export default function DateGuide(props) {
                 Тут будет основная работа программы
             </Div>
         </Panel>
-
     )
 }
