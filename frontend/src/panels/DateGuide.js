@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar, PanelHeaderBack} from '@vkontakte/vkui';
 import axios from "axios";
+import Questions from "./selectComponent/Questions";
+
 
 export default function DateGuide(props) {
     useEffect(() => {
@@ -14,9 +16,7 @@ export default function DateGuide(props) {
             >
                 DateGuide
             </PanelHeader>
-            <Div>
-                Тут будет основная работа программы
-            </Div>
+            <Questions></Questions>
         </Panel>
     )
 }
