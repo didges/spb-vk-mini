@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Button, FormItem, Checkbox} from "@vkontakte/vkui";
 import Select from "react-select";
-
+import './textAnimation.css'
 const quest = [
 
     {
@@ -38,62 +38,103 @@ let iterator = 0
 
 export default function Questions(){
 
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [notEnd, setNotEnd] = useState(true);
+    const [answer, setAnswer] = useState(false);
+    const [money, setMoney] = useState(null);
+    const [district, setDistrict] = useState(null);
+    const [relax, setRelax] = useState(null);
+    const [long, setLong] = useState(null);
+    const [count, setCount] = useState(null);
+    let selectedOption = [money, district, relax, long, count];
+    let setSelectedOption = [setMoney, setDistrict, setRelax, setLong, setCount];
+
     const [question, setQuestion] = useState(quest[0]);
 
 
     function next(){
-        iterator += 1;
-        console.log(iterator)
-        setQuestion(quest[iterator])
-    }
-    if (question['type'] === 1){
-        return (
-            <div style={{ minWidth: 100 }}>
+        if (answer === true) {
+            iterator += 1;
+            if (iterator === 5){
+                setNotEnd(false)
+            }
+            console.log(iterator);
+            setQuestion(quest[iterator]);
+            setAnswer(false);
+        } else {
+            setAnswer(true);
+        }
 
-                <FormItem top={question['question']}>
-                    <Select
-                        defaultValue={selectedOption}
-                        onChange={setSelectedOption}
-                        options={question["answers"]}
-                    />
-                </FormItem>
-                <Button stretched={false} onClick={next}> Далее</Button>
-            </div>
-        )
-    } else if (question['type'] === 2){
+        console.log(iterator)
+
+    }
+    console.log('not end = ', notEnd, "iter = ", iterator)
+    if (notEnd === true){
+        if (answer === false && notEnd === true) {
+            return (
+                <div>
+                    <div class="wrapper">
+                           <h1 class="title"> {question['question']}</h1>
+                    </div>
+                    <Button stretched={false} onClick={next}> Ответить</Button>
+                </div>
+
+            )
+        } else {
+            if (question['type'] === 1) {
+                return (
+                    <div style={{minWidth: 100}}>
+
+                        <FormItem top={question['question']}>
+                            <Select
+                                defaultValue={selectedOption[iterator]}
+                                onChange={setSelectedOption[iterator]}
+                                options={question["answers"]}
+                            />
+                        </FormItem>
+                        <Button stretched={false} onClick={next}> Подтвердить</Button>
+                    </div>
+                )
+            } else if (question['type'] === 2) {
+                return (
+                    <div style={{minWidth: 100}}>
+                        <FormItem top={question['question']}>
+                            <Checkbox onChange={(e) => console.log(e.target.checked)}>
+                                интерактивный
+                            </Checkbox>
+                            <Checkbox onChange={(e) => console.log(e.target.checked)}>
+                                культурный
+                            </Checkbox>
+                            <Checkbox onChange={(e) => console.log(e.target.checked)}>
+                                исторический
+                            </Checkbox>
+                            <Checkbox onChange={(e) => console.log(e.target.checked)}>
+                                релакс
+                            </Checkbox>
+                            <Checkbox onChange={(e) => console.log(e.target.checked)}>
+                                конент. для соц сетей
+                            </Checkbox>
+                            <Checkbox onChange={(e) => console.log(e.target.checked)}>
+                                семейный
+                            </Checkbox>
+                        </FormItem>
+                        <Button stretched={false} onClick={next}> Далее</Button>
+                    </div>
+                )
+            } else {
+                return (
+                    <div style={{minWidth: 100}}>
+                        <FormItem top={question['question']}>
+                            <input type="text" name="name"/>
+                        </FormItem>
+                        <Button stretched={false} onClick={next}> Далее</Button>
+                    </div>
+                )
+            }
+        }
+    } else{
         return (
-            <div style={{ minWidth: 100 }}>
-                <FormItem top={question['question']}>
-                    <Checkbox onChange={(e) => console.log(e.target.checked)}>
-                        интерактивный
-                    </Checkbox>
-                    <Checkbox onChange={(e) => console.log(e.target.checked)}>
-                        культурный
-                    </Checkbox>
-                    <Checkbox onChange={(e) => console.log(e.target.checked)}>
-                        исторический
-                    </Checkbox>
-                    <Checkbox onChange={(e) => console.log(e.target.checked)}>
-                        релакс
-                    </Checkbox>
-                    <Checkbox onChange={(e) => console.log(e.target.checked)}>
-                        конент. для соц сетей
-                    </Checkbox>
-                    <Checkbox onChange={(e) => console.log(e.target.checked)}>
-                        семейный
-                    </Checkbox>
-                </FormItem>
-                <Button stretched={false} onClick={next}> Далее</Button>
-            </div>
-        )
-    } else {
-        return (
-            <div style={{ minWidth: 100 }}>
-                <FormItem top={question['question']}>
-                    <input type="text" name="name" />
-                </FormItem>
-                <Button stretched={false} onClick={next}> Далее</Button>
+            <div>
+                Спасибо
             </div>
         )
     }
