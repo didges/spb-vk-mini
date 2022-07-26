@@ -63,6 +63,20 @@ def filter_duration(dates, desc, time):
     return res if len(res) else dates
 
 
+# Количество
+def filter_count(dates, desc, count):
+    set_dates = set()
+    for date in desc.keys():
+        if "пара" in count and "пара" not in desc[date]["count"]:
+            set_dates.add(date)
+
+        if "компания" in count and "компания" not in desc[date]["count"]:
+            set_dates.add(date)
+
+    res = dates - set_dates
+    return res if len(res) else dates
+
+
 # Слово
 def definition_word(dates):
     if len(dates) <= 3:
@@ -74,6 +88,7 @@ def definition_word(dates):
 
 
 if __name__ == '__main__':
+    # Проверка выбора дейта
     with open("dates.json", "r", encoding="utf-8") as file:
         desc = json.load(file)
         dates = set(desc.keys())
@@ -81,5 +96,20 @@ if __name__ == '__main__':
         dates = filter_area(dates, desc, "Центральный")
         dates = filter_leisure(dates, desc, ["Релакс", "Интерактивный", "Культурный"])
         dates = filter_duration(dates, desc, 6)
+        dates = filter_count(dates, desc, ['пара'])
         dates = definition_word(dates)
-        print(dates)
+
+        res = []
+        for i in dates:
+            res.append({'value': i, 'label': i})
+        print(res)
+
+    # Проверка выбора места
+    with open("places.json", "r", encoding="utf-8") as file:
+        desc = json.load(file)
+        places = list(desc.keys())
+        chosen = places[np.random.randint(1, len(places))]
+        res = desc[chosen]
+        res['name'] = chosen
+        
+        print(res)
