@@ -1,6 +1,5 @@
-from flask import Flask
 from flask_cors import CORS
-from flask import Flask, request
+from flask import Flask, request, render_template
 from filter_date import filter_cost, filter_area, filter_leisure, filter_duration, definition_word, filter_count
 import json
 import numpy as np
@@ -8,11 +7,6 @@ import numpy as np
 app = Flask(__name__)
 CORS(app)
 app.config['Access-Control-Allow-Origin'] = '*'
-
-
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
 
 
 @app.route('/dates_words', methods=['POST'])
@@ -58,8 +52,19 @@ def get_date_words():
     return res
 
 
+@app.route('/get_date_by_word', methods=['POST'])
+def get_date_by_word():
+    word = request.get_json()['word']
+    with open("dates.json", "r", encoding="utf-8") as file:
+        dates = json.load(file)
+        match = dict()
+        for date in list(dates.values()):
+            match[date['word']] = date['link']
+        return match[word]
+
+
 @app.route('/dates_place', methods=['POST'])
-def test():  # put application's code here
+def get_random_place():
     with open("places.json", "r", encoding="utf-8") as file:
         desc = json.load(file)
         places = list(desc.keys())
