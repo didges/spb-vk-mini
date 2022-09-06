@@ -5,9 +5,7 @@ import Questions from "./selectComponent/Questions";
 
 
 export default function DateGuide(props) {
-    useEffect(() => {
-        axios.post('http://localhost:5000/hi').then(r => console.log(r.data));
-    })
+
 
     return (
         <Panel id={props.id}>

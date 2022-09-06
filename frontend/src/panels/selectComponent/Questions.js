@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Button, FormItem, Checkbox} from "@vkontakte/vkui";
 import Select from "react-select";
+import axios from "axios";
 import './textAnimation.css'
 const quest = [
 
@@ -36,6 +37,17 @@ const quest = [
 
 let iterator = 0
 
+
+function request(req){
+    console.log("here")
+    useEffect(() => {
+        axios.post('http://127.0.0.1:5000/dates_words', JSON.stringify(req))
+            .then(res => {
+                console.log(res)
+            })
+    }, [])
+}
+
 export default function Questions(){
 
     const [notEnd, setNotEnd] = useState(true);
@@ -60,9 +72,33 @@ export default function Questions(){
 
 
     function next(){
+        let relaxReq = []
         if (answer === true) {
             if (question['type'] === 2){
-                setRelax([interactive, culture, history, rel, socMedia, family]);
+                if (interactive === true){
+                    relaxReq.push("Интерактивный")
+                }
+                if (culture === true){
+                    relaxReq.push("Культурный")
+                }
+                if (history === true){
+                    relaxReq.push("Исторический")
+                }
+                if (rel === true){
+                    relaxReq.push("Релакс")
+                }
+                if (socMedia === true){
+                    relaxReq.push("Конент. для соц сетей")
+                }
+                if (family === true){
+                    relaxReq.push("Семейный")
+                }
+                setRelax(relaxReq)
+                console.log(relaxReq)
+            }
+            iterator += 1;
+            if (iterator === 5){
+                setNotEnd(false)
                 let value_for_req = {
                     "money": money,
                     "district": district,
@@ -70,10 +106,14 @@ export default function Questions(){
                     "long": long,
                     "count": count
                 }
-            }
-            iterator += 1;
-            if (iterator === 5){
-                setNotEnd(false)
+                console.log(value_for_req)
+                fetch('http://127.0.0.1:5000/dates_words', {
+                    method: "POST",
+                    body: JSON.stringify(value_for_req),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                }).then(r => console.log(r))
             }
             console.log(iterator);
             setQuestion(quest[iterator]);
