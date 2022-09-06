@@ -2,6 +2,7 @@ from flask_cors import CORS
 from flask import Flask, request, render_template
 from filter_date import filter_cost, filter_area, filter_leisure, filter_duration, definition_word, filter_count
 import json
+import os
 import numpy as np
 
 app = Flask(__name__)
@@ -31,8 +32,7 @@ def get_date_words():
                 relax = request_data['relax']
 
         if 'count' in request_data:
-            if (type(request_data['count']) == list) and (len(request_data['count']) > 0):
-                example = request_data['count']
+            count = request_data['count']['value']
 
     with open("dates.json", "r", encoding="utf-8") as file:
         desc = json.load(file)
@@ -45,9 +45,9 @@ def get_date_words():
         dates = filter_count(dates, desc, count)
         dates = definition_word(dates)
 
-    res = []
+    res = ''
     for i in dates:
-        res.append({'value': i, 'label': i})
+        res += f"{i};"
 
     return res
 
@@ -73,6 +73,22 @@ def get_random_place():
         res['name'] = chosen
 
         return res
+
+
+@app.route('/get_main_img', methods=['POST'])
+def get_main_img():
+    dirs = os.listdir("images")
+    res = dict()
+    for dir in dirs:
+        res[dir.split('/')[-1]] = f"images/{sorted(os.listdir(f'images/{dir}'))[0]}"
+    return res
+
+
+@app.route("/get_place_images", methods=['GET', 'POST'])
+def get_place_images():
+    args = request.args
+    place = args.get('place')
+    return tuple(f'images/{i}' for i in os.listdir(f"images/{place}"))
 
 
 if __name__ == '__main__':

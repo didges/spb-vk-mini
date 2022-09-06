@@ -67,10 +67,10 @@ def filter_duration(dates, desc, time):
 def filter_count(dates, desc, count):
     set_dates = set()
     for date in desc.keys():
-        if "пара" in count and "пара" not in desc[date]["count"]:
+        if "Пара" in count and "Пара" not in desc[date]["count"]:
             set_dates.add(date)
 
-        if "компания" in count and "компания" not in desc[date]["count"]:
+        if "Компания" in count and "Компания" not in desc[date]["count"]:
             set_dates.add(date)
 
     res = dates - set_dates
