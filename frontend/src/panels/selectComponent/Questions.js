@@ -45,6 +45,14 @@ export default function Questions(){
     const [relax, setRelax] = useState(null);
     const [long, setLong] = useState(null);
     const [count, setCount] = useState(null);
+    const [interactive, setInteractive] = useState(false);
+    const [culture, setCulture] = useState(false);
+    const [history, setHistory] = useState(false);
+    const [rel, setRel] = useState(false);
+    const [socMedia, setSocMedia] = useState(false);
+    const [family, setFamily] = useState(false);
+
+
     let selectedOption = [money, district, relax, long, count];
     let setSelectedOption = [setMoney, setDistrict, setRelax, setLong, setCount];
 
@@ -53,6 +61,16 @@ export default function Questions(){
 
     function next(){
         if (answer === true) {
+            if (question['type'] === 2){
+                setRelax([interactive, culture, history, rel, socMedia, family]);
+                let value_for_req = {
+                    "money": money,
+                    "district": district,
+                    "relax": relax,
+                    "long": long,
+                    "count": count
+                }
+            }
             iterator += 1;
             if (iterator === 5){
                 setNotEnd(false)
@@ -98,22 +116,40 @@ export default function Questions(){
                 return (
                     <div style={{minWidth: 100}}>
                         <FormItem top={question['question']}>
-                            <Checkbox onChange={(e) => console.log(e.target.checked)}>
+                            <Checkbox onChange={(e) => {
+                                setInteractive(e.target.checked);
+                                console.log(e.target.checked)
+                            }}>
                                 интерактивный
                             </Checkbox>
-                            <Checkbox onChange={(e) => console.log(e.target.checked)}>
+                            <Checkbox onChange={(e) => {
+                                setCulture(e.target.checked);
+                                console.log(e.target.checked)
+                            }}>
                                 культурный
                             </Checkbox>
-                            <Checkbox onChange={(e) => console.log(e.target.checked)}>
+                            <Checkbox onChange={(e) => {
+                                setHistory(e.target.checked);
+                                console.log(e.target.checked)
+                            }}>
                                 исторический
                             </Checkbox>
-                            <Checkbox onChange={(e) => console.log(e.target.checked)}>
+                            <Checkbox onChange={(e) => {
+                                setRel(e.target.checked);
+                                console.log(e.target.checked)
+                            }}>
                                 релакс
                             </Checkbox>
-                            <Checkbox onChange={(e) => console.log(e.target.checked)}>
+                            <Checkbox onChange={(e) => {
+                                setSocMedia(e.target.checked);
+                                console.log(e.target.checked)
+                            }}>
                                 конент. для соц сетей
                             </Checkbox>
-                            <Checkbox onChange={(e) => console.log(e.target.checked)}>
+                            <Checkbox onChange={(e) => {
+                                setFamily(e.target.checked);
+                                console.log(e.target.checked)
+                            }}>
                                 семейный
                             </Checkbox>
                         </FormItem>
@@ -132,6 +168,7 @@ export default function Questions(){
             }
         }
     } else{
+        console.log(selectedOption)
         return (
             <div>
                 Спасибо
