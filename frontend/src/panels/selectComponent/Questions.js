@@ -38,15 +38,7 @@ const quest = [
 let iterator = 0
 
 
-function request(req){
-    console.log("here")
-    useEffect(() => {
-        axios.post('http://127.0.0.1:5000/dates_words', JSON.stringify(req))
-            .then(res => {
-                console.log(res)
-            })
-    }, [])
-}
+
 
 export default function Questions(){
 
@@ -63,12 +55,32 @@ export default function Questions(){
     const [rel, setRel] = useState(false);
     const [socMedia, setSocMedia] = useState(false);
     const [family, setFamily] = useState(false);
-
-
+    const [word, setWord] = useState(null);
+    const [threeWords, setThreeWords] = useState(null);
+    const [viewPDF, setViewPDF] = useState(false);
     let selectedOption = [money, district, relax, long, count];
     let setSelectedOption = [setMoney, setDistrict, setRelax, setLong, setCount];
 
     const [question, setQuestion] = useState(quest[0]);
+    function choose_word(){
+        setViewPDF(true);
+        console.log(word)
+        let require = {
+            "word": word["label"]
+        }
+        fetch('http://127.0.0.1:5000/get_date_by_word', {
+            method: "POST",
+            body: JSON.stringify(require),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(function(response) {
+            return response.json();
+        }).then(function(data) {
+
+            console.log(data)
+        })
+    }
 
 
     function next(){
@@ -113,7 +125,16 @@ export default function Questions(){
                     headers: {
                         "Content-type": "application/json; charset=UTF-8"
                     }
-                }).then(r => console.log(r))
+                }).then(function(response) {
+                    return response.json();
+                }).then(function(data) {
+                    let res = []
+                    for (let i = 0; i < 3; i++){
+                        res.push(data[i])
+                    }
+                    console.log(res);
+                    setThreeWords(res)
+                })
             }
             console.log(iterator);
             setQuestion(quest[iterator]);
@@ -126,92 +147,115 @@ export default function Questions(){
 
     }
     console.log('not end = ', notEnd, "iter = ", iterator)
-    if (notEnd === true){
-        if (answer === false && notEnd === true) {
-            return (
-                <div>
-                    <div class="wrapper">
-                           <h1 class="title"> {question['question']}</h1>
-                    </div>
-                    <Button stretched={false} onClick={next}> Ответить</Button>
-                </div>
-
-            )
-        } else {
-            if (question['type'] === 1) {
+    if (viewPDF === false){
+        if (notEnd === true) {
+            if (answer === false && notEnd === true) {
                 return (
-                    <div style={{minWidth: 100}}>
-
-                        <FormItem top={question['question']}>
-                            <Select
-                                defaultValue={selectedOption[iterator]}
-                                onChange={setSelectedOption[iterator]}
-                                options={question["answers"]}
-                            />
-                        </FormItem>
-                        <Button stretched={false} onClick={next}> Подтвердить</Button>
+                    <div>
+                        <div class="wrapper">
+                            <h1 class="title"> {question['question']}</h1>
+                        </div>
+                        <Button stretched={false} onClick={next}> Ответить</Button>
                     </div>
+
                 )
-            } else if (question['type'] === 2) {
+            } else {
+                if (question['type'] === 1) {
+                    return (
+                        <div style={{minWidth: 100}}>
+
+                            <FormItem top={question['question']}>
+                                <Select
+                                    defaultValue={selectedOption[iterator]}
+                                    onChange={setSelectedOption[iterator]}
+                                    options={question["answers"]}
+                                />
+                            </FormItem>
+                            <Button stretched={false} onClick={next}> Подтвердить</Button>
+                        </div>
+                    )
+                } else if (question['type'] === 2) {
+                    return (
+                        <div style={{minWidth: 100}}>
+                            <FormItem top={question['question']}>
+                                <Checkbox onChange={(e) => {
+                                    setInteractive(e.target.checked);
+                                    console.log(e.target.checked)
+                                }}>
+                                    интерактивный
+                                </Checkbox>
+                                <Checkbox onChange={(e) => {
+                                    setCulture(e.target.checked);
+                                    console.log(e.target.checked)
+                                }}>
+                                    культурный
+                                </Checkbox>
+                                <Checkbox onChange={(e) => {
+                                    setHistory(e.target.checked);
+                                    console.log(e.target.checked)
+                                }}>
+                                    исторический
+                                </Checkbox>
+                                <Checkbox onChange={(e) => {
+                                    setRel(e.target.checked);
+                                    console.log(e.target.checked)
+                                }}>
+                                    релакс
+                                </Checkbox>
+                                <Checkbox onChange={(e) => {
+                                    setSocMedia(e.target.checked);
+                                    console.log(e.target.checked)
+                                }}>
+                                    конент. для соц сетей
+                                </Checkbox>
+                                <Checkbox onChange={(e) => {
+                                    setFamily(e.target.checked);
+                                    console.log(e.target.checked)
+                                }}>
+                                    семейный
+                                </Checkbox>
+                            </FormItem>
+                            <Button stretched={false} onClick={next}> Далее</Button>
+                        </div>
+                    )
+                } else {
+                    return (
+                        <div style={{minWidth: 100}}>
+                            <FormItem top={question['question']}>
+                                <input type="text" name="name"/>
+                            </FormItem>
+                            <Button stretched={false} onClick={next}> Далее</Button>
+                        </div>
+                    )
+                }
+            }
+        } else {
+            if (threeWords === null) {
                 return (
-                    <div style={{minWidth: 100}}>
-                        <FormItem top={question['question']}>
-                            <Checkbox onChange={(e) => {
-                                setInteractive(e.target.checked);
-                                console.log(e.target.checked)
-                            }}>
-                                интерактивный
-                            </Checkbox>
-                            <Checkbox onChange={(e) => {
-                                setCulture(e.target.checked);
-                                console.log(e.target.checked)
-                            }}>
-                                культурный
-                            </Checkbox>
-                            <Checkbox onChange={(e) => {
-                                setHistory(e.target.checked);
-                                console.log(e.target.checked)
-                            }}>
-                                исторический
-                            </Checkbox>
-                            <Checkbox onChange={(e) => {
-                                setRel(e.target.checked);
-                                console.log(e.target.checked)
-                            }}>
-                                релакс
-                            </Checkbox>
-                            <Checkbox onChange={(e) => {
-                                setSocMedia(e.target.checked);
-                                console.log(e.target.checked)
-                            }}>
-                                конент. для соц сетей
-                            </Checkbox>
-                            <Checkbox onChange={(e) => {
-                                setFamily(e.target.checked);
-                                console.log(e.target.checked)
-                            }}>
-                                семейный
-                            </Checkbox>
-                        </FormItem>
-                        <Button stretched={false} onClick={next}> Далее</Button>
+                    <div>
+                        Подождите
                     </div>
                 )
             } else {
                 return (
                     <div style={{minWidth: 100}}>
-                        <FormItem top={question['question']}>
-                            <input type="text" name="name"/>
+
+                        <FormItem top={"Выберите слово"}>
+                            <Select
+                                defaultValue={word}
+                                onChange={setWord}
+                                options={threeWords}
+                            />
                         </FormItem>
-                        <Button stretched={false} onClick={next}> Далее</Button>
+                        <Button stretched={false} onClick={choose_word}> Подтвердить</Button>
                     </div>
                 )
             }
         }
     } else{
-        console.log(selectedOption)
         return (
             <div>
-                Спасибо
+                wait
             </div>
         )
     }
