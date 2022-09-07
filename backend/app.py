@@ -47,7 +47,7 @@ def get_date_words():
 
     res = {}
     for i, data in enumerate(dates):
-        res[i] = {"value": data, "label": data}
+        res[i] = {"value": desc[data]['word'], "label": desc[data]['word']}
 
     return res
 
