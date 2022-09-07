@@ -1,9 +1,10 @@
 from flask_cors import CORS
-from flask import Flask, request, render_template
+from flask import Flask, request
 from filter_date import filter_cost, filter_area, filter_leisure, filter_duration, definition_word, filter_count
 import json
 import os
 import numpy as np
+import requests
 
 app = Flask(__name__)
 CORS(app)
@@ -89,6 +90,38 @@ def get_place_images():
     args = request.args
     place = args.get('place')
     return tuple(f'images/{i}' for i in os.listdir(f"images/{place}"))
+
+
+@app.route("/get_kudago_places", methods=['POST'])
+def get_kudago_places():
+    headers = {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJ2a2lkMDAwMDAwMDAwIiwiZXhwIjoxNjc3ODE1ODA0fQ.mi9SqKWgj2pfunmLgWjvRYOArSKeP7qR3pLLbtnyaO4",
+        "accept": "*/*"
+    }
+
+    p = {
+        'lat': 59.939016, 'lng': 30.31588, 'radius': 15,
+        'categories': "exhibition",
+        'fields': "categories,description,id,place,title,age_restriction,is_free,images",
+        "expand": "images,place,location,dates,participants",
+        "is_free": False, "count": 100
+    }
+
+    response = requests.get('https://spb-afisha.gate.petersburg.ru/kg/external/afisha/events',
+                            headers=headers,
+                            params=p
+                            )
+
+    good_resp = {}
+    for i in range(100):
+        if len(response.json()['data'][i]['images']) > 1:
+            good_resp[response.json()['data'][i]['title']] = {
+                'site_url': response.json()['data'][i]['place']['site_url'],
+                'desk': response.json()['data'][i]['description'],
+                'image': response.json()['data'][i]['images'][0]['image']
+            }
+
+    return good_resp
 
 
 if __name__ == '__main__':
