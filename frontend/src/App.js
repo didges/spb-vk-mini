@@ -7,7 +7,8 @@ import Home from './panels/Home';
 import Persik from './panels/Persik';
 import Result from './panels/Result'
 import DateGuide from "./panels/DateGuide";
-
+import Photo from "./panels/Photo";
+import Slider from "./panels/slider/Slider"
 const App = () => {
 	const [scheme, setScheme] = useState('bright_light')
 	const [activePanel, setActivePanel] = useState('home');
@@ -44,8 +45,10 @@ const App = () => {
 								<Persik id='persik' go={go} />
 								<Result id='result' go={go} fetchedUser={fetchedUser} />
 								<DateGuide id='dg' go={go} fetchedUser={fetchedUser} />
+								<Photo id='photo' go={go} fetchedUser={fetchedUser} />
 							</View>
 						</SplitCol>
+						<Slider go={go}/>
 					</SplitLayout>
 				</AppRoot>
 			</AdaptivityProvider>
