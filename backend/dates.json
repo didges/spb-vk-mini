@@ -1,0 +1,306 @@
+{
+  "1 день из жизни Итальянца": {
+    "money": 3,
+    "district": "Центральный",
+    "relax": [
+      "Интерактивный",
+      "Релакс",
+      "Контент для соц. сетей"
+    ],
+    "long": 4,
+    "count": [
+      "Пара",
+      "Компания"
+    ],
+    "word": "Италия",
+    "link": "https://drive.google.com/file/d/1OwcEqZwcaazalnXh6qwGTXT-4f18a_sh/preview"
+  },
+  "ПутевойДэйт": {
+    "money": 2,
+    "district": "Центральный",
+    "relax": [
+      "Культурный",
+      "Интерактивный",
+      "Семейный"
+    ],
+    "long": 4,
+    "count": [
+      "Пара",
+      "Компания"
+    ],
+    "word": "Поезд",
+    "link": "https://drive.google.com/file/d/1eMLDunozHXQvUJ9CDYn7W8qtWsVUqfHQ/preview"
+  },
+  "Лихие-90": {
+    "money": 3,
+    "district": "Центральный",
+    "relax": [
+      "Интерактивный",
+      "Контент для соц. сетей",
+      "Активный"
+    ],
+    "long": 6,
+    "count": [
+      "Компания"
+    ],
+    "word": "Девяностые",
+    "link": "https://drive.google.com/file/d/1PDadXOeyU9K9HYqNmM1JsYsH9Et0IwNx/preview"
+  },
+  "АртДэйт": {
+    "money": 2,
+    "district": "Центральный",
+    "relax": [
+      "Интерактивный",
+      "Конент для соц. сетей",
+      "Искусство"
+    ],
+    "long": 4,
+    "count": [
+      "Пара"
+    ],
+    "word": "Краски",
+    "link": "https://drive.google.com/file/d/1W2uTcJrtfvxg829AHh6hfSIeDkykkHFq/preview"
+  },
+  "НаноДэйт": {
+    "money": 1,
+    "district": "Центральный",
+    "relax": [
+      "Интерактивный",
+      "Семейный"
+    ],
+    "long": 4,
+    "count": [
+      "Компания"
+    ],
+    "word": "Технологии",
+    "link": "https://drive.google.com/file/d/1YgEiIEZyeVLPhKFGhmGYIs5go6fUHYaa/preview"
+  },
+  "АкваДэйт": {
+    "money": 3,
+    "district": "Центральный",
+    "relax": [
+      "Релакс",
+      "Интерактивный",
+      "Семейный"
+    ],
+    "long": 6,
+    "count": [
+      "Пара",
+      "Компания"
+    ],
+    "word": "Вода",
+    "link": "https://drive.google.com/file/d/1minYfxqV_q9DVyQlLbepB7qloh-dmdjw/preview"
+  },
+  "СкоростнойДэйт": {
+    "money": 2,
+    "district": "Петроградский",
+    "relax": [
+      "На открытом воздухе",
+      "Культурный",
+      "Активный"
+    ],
+    "long": 4,
+    "count": [
+      "Пара",
+      "Компания"
+    ],
+    "word": "Самокат",
+    "link": "https://drive.google.com/file/d/1Bli-fgTI27_pbGpCa70dyxYc3w0nCyKf/preview"
+  },
+  "PhotoDate": {
+    "money": 3,
+    "district": "Василеостровский",
+    "relax": [
+      "Искусство",
+      "Контент для соц. сетей,"
+    ],
+    "long": 6,
+    "count": [
+      "Пара",
+      "Компания"
+    ],
+    "word": "Контент",
+    "link": "https://drive.google.com/file/d/1w16L5DE0MwbzP2TZG-Q0pbp0GvvBwGOo/preview"
+  },
+  "Date4Friends": {
+    "money": 1,
+    "district": "Центральный",
+    "relax": [
+      "Интерактивный",
+      "Контент для соц. сетей",
+      "Активный"
+    ],
+    "long": 6,
+    "count": [
+      "Компания"
+    ],
+    "word": "С друзьями",
+    "link": "https://drive.google.com/file/d/1-RKgtxG5Fqa_6QS8BQDq48e7ZXZOM9EP/preview"
+  },
+  "SPADate": {
+    "money": 2,
+    "district": "Петроградский",
+    "relax": [
+      "Релакс",
+      "семейный"
+    ],
+    "long": 4,
+    "count": [
+      "Пара",
+      "Компания"
+    ],
+    "word": "SPA",
+    "link": "https://drive.google.com/file/d/1rF6v3VlP49Gfn0J1bGngFXPu2fof6r1J/preview"
+  },
+  "GreenDate": {
+    "money": 1,
+    "district": "Петроградский",
+    "relax": [
+      "Релакс",
+      "На открытом воздухе",
+      "Семейный"
+    ],
+    "long": 2,
+    "count": [
+      "Пара"
+    ],
+    "word": "Флора",
+    "link": "https://drive.google.com/file/d/1UA0H7WUy9JKHUFfipAQUCel1CzUYq7hu/preview"
+  },
+  "АзиатскийДэйт": {
+    "money": 2,
+    "district": "Центральный",
+    "relax": [
+      "Искусство",
+      "На открытом воздухе"
+    ],
+    "long": 4,
+    "count": [
+      "Пара",
+      "Компания"
+    ],
+    "word": "Азия",
+    "link": "https://drive.google.com/file/d/1oCXpL-ihsBjfDNZOWz6e2HIFrdupRCfr/preview"
+  },
+  "FreeDate": {
+    "money": 1,
+    "district": "Центральный",
+    "relax": [
+      "Контент для соц. сетей",
+      "Искусство",
+      "Релакс"
+    ],
+    "long": 2,
+    "count": [
+      "Компания"
+    ],
+    "word": "Бесплатно",
+    "link": "https://drive.google.com/file/d/15vMD9u-C_fnh4dmBga245dd90Im0WdZu/preview"
+  },
+  "Вечерний Дэйт": {
+    "money": 3,
+    "district": "Василеостровский",
+    "relax": [
+      "Интерактивный",
+      "Релакс",
+      "Контент для соц. сетей"
+    ],
+    "long": 6,
+    "count": [
+      "Пара"
+    ],
+    "word": "Свидание",
+    "link": "https://drive.google.com/file/d/1_4fQioQ2c66HT9syzgMIOzqk-BsaCdRc/preview"
+  },
+  "БризДэйт": {
+    "money": 2,
+    "district": "Петроградский",
+    "relax": [
+      "На открытом воздухе",
+      "Активный",
+      "Интерактивный"
+    ],
+    "long": 4,
+    "count": [
+      "Пара",
+      "Компания"
+    ],
+    "word": "Остров",
+    "link": "https://drive.google.com/file/d/1lAIboa6hDB_1dkvde_mff0iHk0R9bAHV/preview"
+  },
+  "Прикоснись к искусству": {
+    "money": 3,
+    "district": "Центральный",
+    "relax": [
+      "Интерактивный",
+      "Искусство",
+      "Контент для соц. сетей"
+    ],
+    "long": 4,
+    "count": [
+      "Пара"
+    ],
+    "word": "Творчество",
+    "link": "https://drive.google.com/file/d/1pXtJTe0R8PceqtP-6SYH317XPq5f5Eks/preview"
+  },
+  "Легкая прогулка": {
+    "money": 1,
+    "district": "Центральный",
+    "relax": [
+      "Интерактивный",
+      "Активный",
+      "Конент для соц. сетей"
+    ],
+    "long": 4,
+    "count": [
+      "Компания"
+    ],
+    "word": "Пятница",
+    "link": "https://drive.google.com/file/d/1-ukhvsqBkqGDb3nzRsXvU6pP1hOOgmOO/preview"
+  },
+  "Центральный район - история": {
+    "money": 2,
+    "district": "Центральный",
+    "relax": [
+      "Исторический",
+      "Культурный",
+      "Семейный"
+    ],
+    "long": 6,
+    "count": [
+      "Компания"
+    ],
+    "word": "История",
+    "link": "https://drive.google.com/file/d/1hu99aBc5-tghTT-ddXuBkqqYhor47KAT/preview"
+  },
+  "Васильевский остров - история": {
+    "money": 3,
+    "district": "Василеостровский",
+    "relax": [
+      "Исторический",
+      "Культурный",
+      "Семейный"
+    ],
+    "long": 6,
+    "count": [
+      "Компания"
+    ],
+    "word": "История",
+    "link": "https://drive.google.com/file/d/1zWx7D6UCX64MBDrh-fPCELbQwsl-zM83/preview"
+  },
+  "Петроградский район - история": {
+    "money": 1,
+    "district": "Петроградский",
+    "relax": [
+      "Исторический",
+      "Культурный",
+      "Семейный"
+    ],
+    "long": 4,
+    "count": [
+      "Компания"
+    ],
+    "word": "История",
+    "link": "https://drive.google.com/file/d/1v0sL8XlrYdm2a64TcunB1phFht2Q-gx-/preview"
+  }
+}

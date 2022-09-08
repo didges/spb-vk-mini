@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar, PanelHeaderBack} from '@vkontakte/vkui';
-import axios from "axios";
-import Questions from "./selectComponent/Questions";
+import ImageGrid from "./Grid/ImageGrid";
 
-
-export default function DateGuide(props) {
-
+export default function Photo (props) {
 
     return (
         <Panel id={props.id}>
             <PanelHeader
                 left={<PanelHeaderBack onClick={props.go} data-to="home"/>}
             >
-                DateGuide
+                Место для фотографии
             </PanelHeader>
-            <Questions></Questions>
+            <Div>
+                <ImageGrid/>
+            </Div>
         </Panel>
-    )
+    );
 }
+
