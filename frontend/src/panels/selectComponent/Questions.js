@@ -58,6 +58,7 @@ export default function Questions(){
     const [word, setWord] = useState(null);
     const [threeWords, setThreeWords] = useState(null);
     const [viewPDF, setViewPDF] = useState(false);
+    const [url, setUrl] = useState(null);
     let selectedOption = [money, district, relax, long, count];
     let setSelectedOption = [setMoney, setDistrict, setRelax, setLong, setCount];
 
@@ -75,9 +76,9 @@ export default function Questions(){
                 "Content-type": "application/json; charset=UTF-8"
             }
         }).then(function(response) {
-            return response.json();
+            return response.text();
         }).then(function(data) {
-
+            setUrl(data);
             console.log(data)
         })
     }
@@ -253,11 +254,17 @@ export default function Questions(){
             }
         }
     } else{
-        return (
-            <div>
-                wait
-            </div>
-        )
+        if (url === null){
+            return (
+                <div>
+                    Подождите
+                </div>
+            )
+        } else{
+            return (
+                <iframe src={url} width="630" height="500" allow="autoplay"></iframe>
+            )
+        }
     }
 
 
