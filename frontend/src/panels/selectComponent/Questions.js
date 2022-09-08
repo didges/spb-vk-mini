@@ -262,7 +262,7 @@ export default function Questions(){
             )
         } else{
             return (
-                <iframe src={url} width="630" height="500" allow="autoplay"></iframe>
+                <iframe src={url} width="550" height="500" allow="autoplay"></iframe>
             )
         }
     }
