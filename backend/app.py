@@ -6,6 +6,7 @@ import os
 import numpy as np
 import requests
 
+PROJECT_PATH = "path/spb-vk-mini/backend/"
 app = Flask(__name__)
 CORS(app)
 app.config['Access-Control-Allow-Origin'] = '*'
@@ -81,7 +82,7 @@ def get_main_img():
     dirs = os.listdir("images")
     res = dict()
     for dir in dirs:
-        res[dir.split('/')[-1]] = f"images/{sorted(os.listdir(f'images/{dir}'))[0]}"
+        res[dir.split('/')[-1]] = f"{PROJECT_PATH}/images/{sorted(os.listdir(f'images/{dir}'))[0]}"
     return res
 
 
@@ -89,7 +90,12 @@ def get_main_img():
 def get_place_images():
     args = request.args
     place = args.get('place')
-    return tuple(f'images/{i}' for i in os.listdir(f"images/{place}"))
+    count = 1
+    imgs = dict()
+    for i in sorted(os.listdir(f"{PROJECT_PATH}/images/{place}")):
+        imgs[f"word{count}"] = f"{PROJECT_PATH}/images/{place}/{i}"
+        count += 1
+    return imgs
 
 
 @app.route("/get_kudago_places", methods=['POST'])
