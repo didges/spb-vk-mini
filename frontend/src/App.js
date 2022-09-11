@@ -8,6 +8,7 @@ import Persik from './panels/Persik';
 import Result from './panels/Result'
 import DateGuide from "./panels/DateGuide";
 import Photo from "./panels/Photo";
+import Kudago from "./panels/Kudago";
 import Slider from "./panels/slider/Slider"
 const App = () => {
 	const [scheme, setScheme] = useState('bright_light')
@@ -45,6 +46,7 @@ const App = () => {
 								<Persik id='persik' go={go} />
 								<Result id='result' go={go} fetchedUser={fetchedUser} />
 								<DateGuide id='dg' go={go} fetchedUser={fetchedUser} />
+								<Kudago id='kudago' go={go} fetchedUser={fetchedUser} />
 								<Photo id='photo' go={go} fetchedUser={fetchedUser} />
 							</View>
 						</SplitCol>

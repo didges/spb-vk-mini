@@ -11,13 +11,27 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-export default function ImageGrid(){
+export default function ImageGrid(props){
+    console.log(props.data)
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                 {Array.from(Array(6)).map((_, index) => (
                     <Grid item xs={2} sm={4} md={4} key={index}>
-                        <Item>xs=2</Item>
+                        <Item>
+                            <img src={props.data[index]["image"]} width={100} height={100}/>
+                            {props.ex &&
+                                <div>
+                                    <a target="_blank" href={props.data[index]["link"]}>{props.data[index]["name"]}</a>
+                                </div>
+                            }
+                            {!props.ex &&
+                                <div>
+                                    <a href={props.data[index]["link"]}>{props.data[index]["name"]}</a>
+                                </div>
+                            }
+
+                        </Item>
                     </Grid>
                 ))}
             </Grid>
