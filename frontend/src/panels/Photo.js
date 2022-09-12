@@ -41,7 +41,7 @@ export default function Photo (props) {
             }
             {places !== null &&
                 <div>
-                    <ImageGrid data={places} ex={true}/>
+                    <ImageGrid data={places} ex={false}/>
                 </div>}
         </Panel>
     );

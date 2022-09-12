@@ -5,7 +5,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 
 import Home from './panels/Home';
 import Persik from './panels/Persik';
-import Result from './panels/Result'
+import Random from './panels/Random'
 import DateGuide from "./panels/DateGuide";
 import Photo from "./panels/Photo";
 import Kudago from "./panels/Kudago";
@@ -44,7 +44,7 @@ const App = () => {
 							<View activePanel={activePanel}>
 								<Home id='home' fetchedUser={fetchedUser} go={go} />
 								<Persik id='persik' go={go} />
-								<Result id='result' go={go} fetchedUser={fetchedUser} />
+								<Random id='random' go={go} fetchedUser={fetchedUser} />
 								<DateGuide id='dg' go={go} fetchedUser={fetchedUser} />
 								<Kudago id='kudago' go={go} fetchedUser={fetchedUser} />
 								<Photo id='photo' go={go} fetchedUser={fetchedUser} />
