@@ -2,13 +2,16 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import {grey} from "@mui/material/colors";
 
 const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'rgba(101,99,99,0.5)',
     ...theme.typography.body2,
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+
+    height: 180
 }));
 
 export default function ImageGrid(props){
@@ -30,7 +33,6 @@ export default function ImageGrid(props){
                                     <a href={props.data[index]["link"]}>{props.data[index]["name"]}</a>
                                 </div>
                             }
-
                         </Item>
                     </Grid>
                 ))}

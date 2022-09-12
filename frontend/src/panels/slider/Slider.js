@@ -12,7 +12,7 @@ export default function Slider({go}){
                 <MenuItem onClick={go} data-to={'dg'}>
                     DG
                 </MenuItem>
-                <MenuItem onClick={go} data-to={'result'}>
+                <MenuItem  onClick={go} data-to={'result'}>
                     Res
                 </MenuItem>
                 <MenuItem onClick={go} data-to={'kudago'}>
