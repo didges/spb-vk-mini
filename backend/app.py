@@ -83,7 +83,8 @@ def get_main_img():
     dirs = os.listdir("images")
     res = dict()
     for dir in dirs:
-        res[dir.split('/')[-1]] = f"{PROJECT_PATH}/images/{sorted(os.listdir(f'images/{dir}'))[0]}"
+        name = dir.split('/')[-1]
+        res[name] = f"{PROJECT_PATH}/images/{name}/{sorted(os.listdir(f'images/{dir}'))[0]}"
     return res
 
 
