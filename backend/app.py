@@ -7,7 +7,6 @@ import numpy as np
 import requests
 import urllib.request
 
-PROJECT_PATH = "/home/homry/OSLL/spb-vk-mini/backend"
 app = Flask(__name__)
 CORS(app)
 app.config['Access-Control-Allow-Origin'] = '*'
@@ -84,7 +83,7 @@ def get_main_img():
     res = dict()
     for dir in dirs:
         name = dir.split('/')[-1]
-        res[name] = f"{PROJECT_PATH}/images/{name}/{sorted(os.listdir(f'images/{dir}'))[0]}"
+        res[name] = f"images/{name}/{sorted(os.listdir(f'images/{dir}'))[0]}"
     return res
 
 
@@ -94,8 +93,8 @@ def get_place_images():
     place = args.get('place')
     count = 1
     imgs = dict()
-    for i in sorted(os.listdir(f"{PROJECT_PATH}/images/{place}")):
-        imgs[f"word{count}"] = f"{PROJECT_PATH}/images/{place}/{i}"
+    for i in sorted(os.listdir(f"images/{place}")):
+        imgs[f"word{count}"] = f"images/{place}/{i}"
         count += 1
     return imgs
 
