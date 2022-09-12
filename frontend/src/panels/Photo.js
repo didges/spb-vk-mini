@@ -23,7 +23,7 @@ export default function Photo (props) {
                 }
                 values.push(tmp);
             }
-            console.log(values)
+
             setPlaces(values)
         })
     }, [])
