@@ -7,7 +7,7 @@ import numpy as np
 import requests
 import urllib.request
 
-PROJECT_PATH = "path/spb-vk-mini/backend/"
+PROJECT_PATH = "/home/homry/OSLL/spb-vk-mini/backend"
 app = Flask(__name__)
 CORS(app)
 app.config['Access-Control-Allow-Origin'] = '*'
