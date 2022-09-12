@@ -5,6 +5,7 @@ import json
 import os
 import numpy as np
 import requests
+import urllib.request
 
 PROJECT_PATH = "path/spb-vk-mini/backend/"
 app = Flask(__name__)
@@ -119,13 +120,19 @@ def get_kudago_places():
                             )
 
     good_resp = {}
-    for i in range(100):
+    arr = list(range(100))
+    np.random.shuffle(arr)
+    for i in arr:
         if len(response.json()['data'][i]['images']) > 1:
-            good_resp[response.json()['data'][i]['title']] = {
+            try:
+                urllib.request.urlopen(response.json()['data'][i]['place']['site_url']).read()
+                good_resp[response.json()['data'][i]['title']] = {
                 'site_url': response.json()['data'][i]['place']['site_url'],
                 'desk': response.json()['data'][i]['description'],
                 'image': response.json()['data'][i]['images'][0]['image']
-            }
+                }
+            except:
+                pass
 
     return good_resp
 
