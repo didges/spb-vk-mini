@@ -13,13 +13,14 @@ export default function Photo (props) {
         }).then(function(response) {
             return response.json();
         }).then(function(data) {
-
+            console.log(data)
             let keys = Object.keys(data);
             let values = []
             for (let i = 0; i < keys.length; i++){
                 let tmp = {
                     "name": keys[i],
-                    "image": data[keys[i]]
+                    "image": "http://127.0.0.1:5000/get_photo/"+data[keys[i]],
+                    "link": "http://127.0.0.1:5000/get_place_images/"+keys[i]+"/place"
                 }
                 values.push(tmp);
             }
@@ -41,7 +42,7 @@ export default function Photo (props) {
             }
             {places !== null &&
                 <div>
-                    <ImageGrid data={places} ex={false}/>
+                    <ImageGrid data={places} setData={setPlaces} ex={false}/>
                 </div>}
         </Panel>
     );

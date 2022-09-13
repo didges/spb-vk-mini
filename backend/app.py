@@ -1,5 +1,5 @@
 from flask_cors import CORS
-from flask import Flask, request
+from flask import Flask, request, send_file
 from filter_date import filter_cost, filter_area, filter_leisure, filter_duration, definition_word, filter_count
 import json
 import os
@@ -87,10 +87,16 @@ def get_main_img():
     return res
 
 
-@app.route("/get_place_images", methods=['GET', 'POST'])
-def get_place_images():
-    args = request.args
-    place = args.get('place')
+@app.route('/get_photo/<image>/<directory>/<name>', methods=['POST', 'GET'])
+def get_photo(image, directory, name):
+    filename = f'./{image}/{directory}/{name}'
+    print(filename)
+    return send_file(filename, mimetype='image/gif')
+
+
+@app.route("/get_place_images/<place>/place", methods=['GET', 'POST'])
+def get_place_images(place):
+    print(place)
     count = 1
     imgs = dict()
     for i in sorted(os.listdir(f"images/{place}")):
