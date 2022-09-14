@@ -1,10 +1,11 @@
 from flask_cors import CORS
-from flask import Flask, request
+from flask import Flask, request, send_file
 from filter_date import filter_cost, filter_area, filter_leisure, filter_duration, definition_word, filter_count
 import json
 import os
 import numpy as np
 import requests
+import urllib.request
 
 app = Flask(__name__)
 CORS(app)
@@ -81,15 +82,27 @@ def get_main_img():
     dirs = os.listdir("images")
     res = dict()
     for dir in dirs:
-        res[dir.split('/')[-1]] = f"images/{sorted(os.listdir(f'images/{dir}'))[0]}"
+        name = dir.split('/')[-1]
+        res[name] = f"images/{name}/{sorted(os.listdir(f'images/{dir}'))[0]}"
     return res
 
 
-@app.route("/get_place_images", methods=['GET', 'POST'])
-def get_place_images():
-    args = request.args
-    place = args.get('place')
-    return tuple(f'images/{i}' for i in os.listdir(f"images/{place}"))
+@app.route('/get_photo/<image>/<directory>/<name>', methods=['POST', 'GET'])
+def get_photo(image, directory, name):
+    filename = f'./{image}/{directory}/{name}'
+    print(filename)
+    return send_file(filename, mimetype='image/gif')
+
+
+@app.route("/get_place_images/<place>/place", methods=['GET', 'POST'])
+def get_place_images(place):
+    print(place)
+    count = 1
+    imgs = dict()
+    for i in sorted(os.listdir(f"images/{place}")):
+        imgs[f"word{count}"] = f"images/{place}/{i}"
+        count += 1
+    return imgs
 
 
 @app.route("/get_kudago_places", methods=['POST'])
@@ -113,13 +126,19 @@ def get_kudago_places():
                             )
 
     good_resp = {}
-    for i in range(100):
+    arr = list(range(100))
+    np.random.shuffle(arr)
+    for i in arr:
         if len(response.json()['data'][i]['images']) > 1:
-            good_resp[response.json()['data'][i]['title']] = {
+            try:
+                urllib.request.urlopen(response.json()['data'][i]['place']['site_url']).read()
+                good_resp[response.json()['data'][i]['title']] = {
                 'site_url': response.json()['data'][i]['place']['site_url'],
                 'desk': response.json()['data'][i]['description'],
                 'image': response.json()['data'][i]['images'][0]['image']
-            }
+                }
+            except:
+                pass
 
     return good_resp
 
