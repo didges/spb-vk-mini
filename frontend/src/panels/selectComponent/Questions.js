@@ -85,63 +85,77 @@ export default function Questions(){
 
 
     function next(){
-        let relaxReq = []
-        if (answer === true) {
-            if (question['type'] === 2){
-                if (interactive === true){
-                    relaxReq.push("Интерактивный")
+        let goNext = true;
+        if (answer === true){
+            if (question['type'] === 1){
+                if (selectedOption[iterator] === null){
+                    goNext = false;
                 }
-                if (culture === true){
-                    relaxReq.push("Культурный")
+            } else if (question['type'] === 2){
+                if (interactive === false && culture === false && history === false && rel === false && socMedia === false && family === false){
+                    goNext = false;
                 }
-                if (history === true){
-                    relaxReq.push("Исторический")
-                }
-                if (rel === true){
-                    relaxReq.push("Релакс")
-                }
-                if (socMedia === true){
-                    relaxReq.push("Конент. для соц сетей")
-                }
-                if (family === true){
-                    relaxReq.push("Семейный")
-                }
-                setRelax(relaxReq)
-                console.log(relaxReq)
             }
-            iterator += 1;
-            if (iterator === 5){
-                setNotEnd(false)
-                let value_for_req = {
-                    "money": money,
-                    "district": district,
-                    "relax": relax,
-                    "long": long,
-                    "count": count
+        }
+        if (goNext){
+            let relaxReq = []
+            if (answer === true) {
+                if (question['type'] === 2) {
+                    if (interactive === true) {
+                        relaxReq.push("Интерактивный")
+                    }
+                    if (culture === true) {
+                        relaxReq.push("Культурный")
+                    }
+                    if (history === true) {
+                        relaxReq.push("Исторический")
+                    }
+                    if (rel === true) {
+                        relaxReq.push("Релакс")
+                    }
+                    if (socMedia === true) {
+                        relaxReq.push("Конент. для соц сетей")
+                    }
+                    if (family === true) {
+                        relaxReq.push("Семейный")
+                    }
+                    setRelax(relaxReq)
+                    console.log(relaxReq)
                 }
-                console.log(value_for_req)
-                fetch('http://127.0.0.1:5000/dates_words', {
-                    method: "POST",
-                    body: JSON.stringify(value_for_req),
-                    headers: {
-                        "Content-type": "application/json; charset=UTF-8"
+                iterator += 1;
+                if (iterator === 5) {
+                    setNotEnd(false)
+                    let value_for_req = {
+                        "money": money,
+                        "district": district,
+                        "relax": relax,
+                        "long": long,
+                        "count": count
                     }
-                }).then(function(response) {
-                    return response.json();
-                }).then(function(data) {
-                    let res = []
-                    for (let i = 0; i < 3; i++){
-                        res.push(data[i])
-                    }
-                    console.log(res);
-                    setThreeWords(res)
-                })
+                    console.log(value_for_req)
+                    fetch('http://127.0.0.1:5000/dates_words', {
+                        method: "POST",
+                        body: JSON.stringify(value_for_req),
+                        headers: {
+                            "Content-type": "application/json; charset=UTF-8"
+                        }
+                    }).then(function (response) {
+                        return response.json();
+                    }).then(function (data) {
+                        let res = []
+                        for (let i = 0; i < 3; i++) {
+                            res.push(data[i])
+                        }
+                        console.log(res);
+                        setThreeWords(res)
+                    })
+                }
+                console.log(iterator);
+                setQuestion(quest[iterator]);
+                setAnswer(false);
+            } else {
+                setAnswer(true);
             }
-            console.log(iterator);
-            setQuestion(quest[iterator]);
-            setAnswer(false);
-        } else {
-            setAnswer(true);
         }
 
         console.log(iterator)
