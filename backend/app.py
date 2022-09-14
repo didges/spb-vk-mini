@@ -132,9 +132,9 @@ def get_kudago_places():
         if len(response.json()['data'][i]['images']) > 1:
             try:
                 urllib.request.urlopen(response.json()['data'][i]['place']['site_url']).read()
-                good_resp[response.json()['data'][i]['title']] = {
+                good_resp[response.json()['data'][i]['title'].capitalize()] = {
                 'site_url': response.json()['data'][i]['place']['site_url'],
-                'desk': response.json()['data'][i]['description'],
+                'desk': response.json()['data'][i]['description'].capitalize(),
                 'image': response.json()['data'][i]['images'][0]['image']
                 }
             except:

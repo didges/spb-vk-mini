@@ -1,0 +1,23 @@
+#randomdiv {
+ background-image: url("../background/randomstart.png");
+ background-color: #cccccc;
+ background-repeat: no-repeat;
+ background-size: contain;
+ width: 550px;
+ height: 439px;
+}
+
+.randomdata {
+ text-align: center;
+}
+
+#randbut:nth-of-type(1) {
+    position: absolute;
+    left: 250px;
+
+}
+
+
+PanelHeader {
+    display: none;
+}

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar, PanelHeaderBack} from '@vkontakte/vkui';
 import ImageGrid from "./Grid/ImageGrid";
+import './gridstyles.css'
 
 export default function Kudago (props) {
     const [places, setPlaces] = useState(null)
@@ -35,15 +36,18 @@ export default function Kudago (props) {
             >
                 Актуальные события
             </PanelHeader>
-            {places === null &&
+            <div class="photodiv">
+                {places === null &&
+                    <div>
+                        подождите
+                    </div>
+                }
+                {places !== null &&
                 <div>
-                    подождите
+                    <ImageGrid data={places} ex={true}/>
                 </div>
-            }
-            {places !== null &&
-            <div>
-                <ImageGrid data={places} ex={true}/>
-            </div>}
+                }
+            </div>
         </Panel>
     );
 

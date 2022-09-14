@@ -1,6 +1,7 @@
 import React, {useEffect, useState}from 'react';
 import {Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar, PanelHeaderBack} from '@vkontakte/vkui';
-import ImageGrid from "./Grid/ImageGrid";
+import IdeasGrid from "./Grid/IdeasGrid";
+import './gridstyles.css'
 
 export default function Photo (props) {
     const [places, setPlaces] = useState(null)
@@ -35,15 +36,18 @@ export default function Photo (props) {
             >
                 Идеи для фотографии
             </PanelHeader>
-            {places === null &&
-                <div>
-                    подождите
-                </div>
-            }
-            {places !== null &&
-                <div>
-                    <ImageGrid data={places} setData={setPlaces} ex={false}/>
-                </div>}
+            <div class="photodiv">
+                {places === null &&
+                    <div>
+                        подождите
+                    </div>
+                }
+                {places !== null &&
+                    <div>
+                        <IdeasGrid data={places} setData={setPlaces} ex={false}/>
+                    </div>
+                }
+            </div>
         </Panel>
     );
 }

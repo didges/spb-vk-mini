@@ -11,8 +11,8 @@ const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-
-    height: 220
+    width: 220,
+    height: 210,
 }));
 
 
@@ -42,7 +42,7 @@ function update(link, setData){
     })
 }
 
-export default function ImageGrid(props){
+export default function IdeasGrid(props){
     console.log(props.data)
     const [data, setData] = useState(props.data)
 
@@ -54,20 +54,14 @@ export default function ImageGrid(props){
                     <Grid item xs={2} sm={4} md={4} key={index}>
                         <Item>
                             {!props.ex &&
-                                <img src={data[index]["image"]} width={160} height={160}/>
+                                <a href="#" onClick={() => update(data[index]["link"], setData)}>
+                                    <img src={data[index]["image"]} width={200} height={200}/>
+                                </a>
                             }
                             {props.ex &&
-                                <img src={props.data[index]["image"]} width={160} height={160}/>
-                            }
-                            {props.ex &&
-                                <div>
-                                    <a target="_blank" href={props.data[index]["link"]}>{props.data[index]["name"]}</a>
-                                </div>
-                            }
-                            {!props.ex &&
-                                <div>
-                                    <a href="#" onClick={() => update(data[index]["link"], setData)}>{data[index]["name"]}</a>
-                                </div>
+                                <a target="_blank" href={props.data[index]["link"]}>
+                                    <img src={props.data[index]["image"]} width={200} height={200}/>
+                                </a>
                             }
                         </Item>
                     </Grid>

@@ -3,32 +3,16 @@ import PropTypes from 'prop-types';
 
 import { Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar } from '@vkontakte/vkui';
 import Slider from "./slider/Slider";
+import './homestyles.css';
 
 const Home = ({ id, go, fetchedUser }) => (
 
 	<Panel id={id}>
-		<PanelHeader>Тестовая начальная страница</PanelHeader>
+	<div class="maindiv">
 
-		{fetchedUser &&
-			<Group header={<Header mode="secondary">Формальное приветствие</Header>}>
-				<Div>
-					Привет, {fetchedUser.first_name} {fetchedUser.last_name}, это тестовая домашняя страница, здаесь будет находиться какая-то информация
-				</Div>
-			</Group>
-		}
-
-		<Group header={<Header mode="secondary">Navigation Example</Header>}>
-			<Div>
-				<Button stretched size="s" mode="secondary" onClick={go} data-to="dg">
-					Начнем работать
-				</Button>
-				<Button stretched size="s" mode="secondary" onClick={go} data-to="result">
-					Давай посмотрим на результат
-				</Button>
-			</Div>
-		</Group>
-
+    </div>
 	</Panel>
+
 );
 
 Home.propTypes = {

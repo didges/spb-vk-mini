@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar, PanelHeaderBack} from '@vkontakte/vkui';
 import axios from "axios";
 import Questions from "./selectComponent/Questions";
-
+import './guidestyles.css';
 
 export default function DateGuide(props) {
 
@@ -14,7 +14,9 @@ export default function DateGuide(props) {
             >
                 DateGuide
             </PanelHeader>
-            <Questions></Questions>
+            <div class="guidediv">
+                <Questions></Questions>
+            </div>
         </Panel>
     )
 }

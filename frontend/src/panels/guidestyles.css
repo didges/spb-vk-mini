@@ -1,0 +1,8 @@
+.guidediv {
+ background-image: url("../background/guide.png");
+ background-color: #cccccc;
+ background-size: contain;
+ width: 550px;
+ height: 439px;
+
+}
