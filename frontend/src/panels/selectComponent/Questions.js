@@ -35,13 +35,13 @@ const quest = [
     }
 ]
 
-let iterator = 0
+
 
 
 
 
 export default function Questions(){
-
+    const [iterator, setIterator] = useState(1);
     const [notEnd, setNotEnd] = useState(true);
     const [answer, setAnswer] = useState(false);
     const [money, setMoney] = useState(null);
@@ -64,29 +64,32 @@ export default function Questions(){
 
     const [question, setQuestion] = useState(quest[0]);
     function choose_word(){
-        setViewPDF(true);
-        console.log(word)
-        let require = {
-            "word": word["label"]
-        }
-        fetch('http://127.0.0.1:5000/get_date_by_word', {
-            method: "POST",
-            body: JSON.stringify(require),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
+        if (word !== null){
+            setViewPDF(true);
+            console.log(word)
+            let require = {
+                "word": word["label"]
             }
-        }).then(function(response) {
-            return response.text();
-        }).then(function(data) {
-            setUrl(data);
-            console.log(data)
-        })
+            fetch('http://127.0.0.1:5000/get_date_by_word', {
+                method: "POST",
+                body: JSON.stringify(require),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }).then(function(response) {
+                return response.text();
+            }).then(function(data) {
+                setUrl(data);
+                console.log(data)
+            })
+        }
     }
 
 
     function next(){
         let goNext = true;
         if (answer === true){
+            console.log("question['type'] === ", question['type'])
             if (question['type'] === 1){
                 if (selectedOption[iterator] === null){
                     goNext = false;
@@ -122,7 +125,7 @@ export default function Questions(){
                     setRelax(relaxReq)
                     console.log(relaxReq)
                 }
-                iterator += 1;
+                setIterator(iterator+1)
                 if (iterator === 5) {
                     setNotEnd(false)
                     let value_for_req = {
