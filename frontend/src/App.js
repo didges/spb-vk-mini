@@ -4,7 +4,6 @@ import { View, ScreenSpinner, AdaptivityProvider, AppRoot, ConfigProvider, Split
 import '@vkontakte/vkui/dist/vkui.css';
 
 import Home from './panels/Home';
-import Persik from './panels/Persik';
 import Random from './panels/Random'
 import DateGuide from "./panels/DateGuide";
 import Photo from "./panels/Photo";
@@ -43,7 +42,6 @@ const App = () => {
 						<SplitCol>
 							<View activePanel={activePanel}>
 								<Home id='home' fetchedUser={fetchedUser} go={go} />
-								<Persik id='persik' go={go} />
 								<Random id='random' go={go} fetchedUser={fetchedUser} />
 								<DateGuide id='dg' go={go} fetchedUser={fetchedUser} />
 								<Kudago id='kudago' go={go} fetchedUser={fetchedUser} />
