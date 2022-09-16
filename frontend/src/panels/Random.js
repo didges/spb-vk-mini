@@ -11,7 +11,7 @@ function changeBgImg(){
 export default function Random (props) {
     const [place, setPlaces] = useState(null);
     function click(){
-        fetch('http://127.0.0.1:5000/dates_place', {
+        fetch('https://devteamapp.space/dates_place', {
             method: "POST",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"

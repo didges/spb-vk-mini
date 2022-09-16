@@ -6,7 +6,7 @@ import './gridstyles.css'
 export default function Photo (props) {
     const [places, setPlaces] = useState(null)
     useEffect(() =>{
-        fetch('http://127.0.0.1:5000/get_main_img', {
+        fetch('https://devteamapp.space/get_main_img', {
             method: "POST",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -20,8 +20,8 @@ export default function Photo (props) {
             for (let i = 0; i < keys.length; i++){
                 let tmp = {
                     "name": keys[i],
-                    "image": "http://127.0.0.1:5000/get_photo/"+data[keys[i]],
-                    "link": "http://127.0.0.1:5000/get_place_images/"+keys[i]+"/place"
+                    "image": "https://devteamapp.space/get_photo/"+data[keys[i]],
+                    "link": "https://devteamapp.space/get_place_images/"+keys[i]+"/place"
                 }
                 values.push(tmp);
             }

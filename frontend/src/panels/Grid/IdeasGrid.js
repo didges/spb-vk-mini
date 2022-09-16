@@ -32,7 +32,7 @@ function update(link, setData){
         for (let i = 0; i < keys.length; i++){
             let tmp = {
                 "name": keys[i],
-                "image": "http://127.0.0.1:5000/get_photo/"+data[keys[i]],
+                "image": "https://devteamapp.space/get_photo/"+data[keys[i]],
 
             }
             values.push(tmp);

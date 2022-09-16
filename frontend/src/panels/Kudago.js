@@ -6,7 +6,7 @@ import './gridstyles.css'
 export default function Kudago (props) {
     const [places, setPlaces] = useState(null)
     useEffect(() =>{
-        fetch('http://127.0.0.1:5000/get_kudago_places', {
+        fetch('https://devteamapp.space/get_kudago_places', {
             method: "POST",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"

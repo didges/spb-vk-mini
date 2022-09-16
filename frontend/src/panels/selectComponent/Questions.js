@@ -70,7 +70,7 @@ export default function Questions(){
             let require = {
                 "word": word["label"]
             }
-            fetch('http://127.0.0.1:5000/get_date_by_word', {
+            fetch('https://devteamapp.space/get_date_by_word', {
                 method: "POST",
                 body: JSON.stringify(require),
                 headers: {
@@ -136,7 +136,7 @@ export default function Questions(){
                         "count": count
                     }
                     console.log(value_for_req)
-                    fetch('http://127.0.0.1:5000/dates_words', {
+                    fetch('https://devteamapp.space/dates_words', {
                         method: "POST",
                         body: JSON.stringify(value_for_req),
                         headers: {
