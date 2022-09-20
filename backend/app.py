@@ -90,7 +90,6 @@ def get_main_img():
 @app.route('/get_photo/<image>/<directory>/<name>', methods=['POST', 'GET'])
 def get_photo(image, directory, name):
     filename = f'./{image}/{directory}/{name}'
-    print(filename)
     return send_file(filename, mimetype='image/gif')
 
 
@@ -115,7 +114,7 @@ def get_kudago_places():
     p = {
         'lat': 59.939016, 'lng': 30.31588, 'radius': 15,
         'categories': "exhibition",
-        'fields': "categories,description,id,place,title,age_restriction,is_free,images",
+        'fields': "categories,description,id,place,title,age_restriction,is_free,images,site_url",
         "expand": "images,place,location,dates,participants",
         "is_free": False, "count": 100
     }
@@ -133,7 +132,7 @@ def get_kudago_places():
             try:
                 urllib.request.urlopen(response.json()['data'][i]['place']['site_url']).read()
                 good_resp[response.json()['data'][i]['title'].capitalize()] = {
-                'site_url': response.json()['data'][i]['place']['site_url'],
+                'site_url': response.json()['data'][i]['site_url'],
                 'desk': response.json()['data'][i]['description'].capitalize(),
                 'image': response.json()['data'][i]['images'][0]['image']
                 }
