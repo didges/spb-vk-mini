@@ -3,6 +3,7 @@ import {Button, FormItem, Checkbox} from "@vkontakte/vkui";
 import Select from "react-select";
 import axios from "axios";
 import './textAnimation.css'
+import {func} from "prop-types";
 const quest = [
 
     {
@@ -31,7 +32,7 @@ const quest = [
     },
     {
         "question": "Осталось выбрать всего лишь слово, которое будет ассоциироваться с предстоящим Дэйтом",
-        "type": 3
+        "type": 1
     }
 ]
 
@@ -40,10 +41,9 @@ const quest = [
 
 
 
-export default function Questions(){
-    const [iterator, setIterator] = useState(1);
-    const [notEnd, setNotEnd] = useState(true);
-    const [answer, setAnswer] = useState(false);
+export default function Questions() {
+    const [isAnswer, setIsAnswer] = useState(false);
+    const [iterator, setIterator] = useState(0);
     const [money, setMoney] = useState(null);
     const [district, setDistrict] = useState(null);
     const [relax, setRelax] = useState(null);
@@ -55,14 +55,34 @@ export default function Questions(){
     const [rel, setRel] = useState(false);
     const [socMedia, setSocMedia] = useState(false);
     const [family, setFamily] = useState(false);
-    const [word, setWord] = useState(null);
     const [threeWords, setThreeWords] = useState(null);
+    const [word, setWord] = useState(null);
     const [viewPDF, setViewPDF] = useState(false);
     const [url, setUrl] = useState(null);
-    let selectedOption = [money, district, relax, long, count];
-    let setSelectedOption = [setMoney, setDistrict, setRelax, setLong, setCount];
+    let selectedOption = [money, district, [], long, count, word];
+    let setSelectedOption = [setMoney, setDistrict, setRelax, setLong, setCount, setWord];
 
-    const [question, setQuestion] = useState(quest[0]);
+    function restart() {
+        setIterator(0);
+        setIsAnswer(false);
+        setMoney(null);
+        setDistrict(null)
+        setRelax(null)
+        setLong(null)
+        setCount(null)
+        setInteractive(false)
+        setCulture(false)
+        setHistory(false)
+        setRel(false)
+        setSocMedia(false)
+        setFamily(false)
+        setThreeWords(null)
+        setViewPDF(false)
+        setUrl(null)
+        selectedOption = [money, district, [], long, count, word];
+        setSelectedOption = [setMoney, setDistrict, setRelax, setLong, setCount, setWord];
+    }
+
     function choose_word(){
         if (word !== null){
             setViewPDF(true);
@@ -85,187 +105,190 @@ export default function Questions(){
         }
     }
 
-
-    function next(){
-        let goNext = true;
-        if (answer === true){
-            console.log("question['type'] === ", question['type'])
-            if (question['type'] === 1){
-                if (selectedOption[iterator] === null){
-                    goNext = false;
-                }
-            } else if (question['type'] === 2){
-                if (interactive === false && culture === false && history === false && rel === false && socMedia === false && family === false){
-                    goNext = false;
-                }
-            }
+    function request_date_words(){
+        console.log('in request')
+        let value_for_req = {
+            "money": money,
+            "district": district,
+            "relax": relax,
+            "long": long,
+            "count": count
         }
-        if (goNext){
-            let relaxReq = []
-            if (answer === true) {
-                if (question['type'] === 2) {
-                    if (interactive === true) {
-                        relaxReq.push("Интерактивный")
-                    }
-                    if (culture === true) {
-                        relaxReq.push("Культурный")
-                    }
-                    if (history === true) {
-                        relaxReq.push("Исторический")
-                    }
-                    if (rel === true) {
-                        relaxReq.push("Релакс")
-                    }
-                    if (socMedia === true) {
-                        relaxReq.push("Конент. для соц сетей")
-                    }
-                    if (family === true) {
-                        relaxReq.push("Семейный")
-                    }
-                    setRelax(relaxReq)
-                    console.log(relaxReq)
-                }
-                setIterator(iterator+1)
-                if (iterator === 5) {
-                    setNotEnd(false)
-                    let value_for_req = {
-                        "money": money,
-                        "district": district,
-                        "relax": relax,
-                        "long": long,
-                        "count": count
-                    }
-                    console.log(value_for_req)
-                    fetch('https://devteamapp.space/dates_words', {
-                        method: "POST",
-                        body: JSON.stringify(value_for_req),
-                        headers: {
-                            "Content-type": "application/json; charset=UTF-8"
-                        }
-                    }).then(function (response) {
-                        return response.json();
-                    }).then(function (data) {
-                        let res = []
-                        for (let i = 0; i < 3; i++) {
-                            res.push(data[i])
-                        }
-                        console.log(res);
-                        setThreeWords(res)
-                    })
-                }
-                console.log(iterator);
-                setQuestion(quest[iterator]);
-                setAnswer(false);
-            } else {
-                setAnswer(true);
+        console.log(`value_for_req = ${JSON.stringify(value_for_req)}`)
+        fetch('https://devteamapp.space/dates_words', {
+            method: "POST",
+            body: JSON.stringify(value_for_req),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
             }
-        }
-
-        console.log(iterator)
-
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            let res = []
+            for (let i = 0; i < 3; i++) {
+                res.push(data[i])
+            }
+            console.log(res);
+            setThreeWords(res)
+        })
     }
-    console.log('not end = ', notEnd, "iter = ", iterator)
-    if (viewPDF === false){
-        if (notEnd === true) {
-            if (answer === false && notEnd === true) {
-                return (
-                    <div>
-                        <div class="wrapper">
-                            <h1 class="title"> {question['question']}</h1>
-                        </div>
-                        <Button stretched={false} onClick={next}> Ответить</Button>
+
+    function set_ans(){
+        let relaxReq = [];
+        if (interactive === true) {
+            relaxReq.push("Интерактивный")
+        }
+        if (culture === true) {
+            relaxReq.push("Культурный")
+        }
+        if (history === true) {
+            relaxReq.push("Исторический")
+        }
+        if (rel === true) {
+            relaxReq.push("Релакс")
+        }
+        if (socMedia === true) {
+            relaxReq.push("Конент. для соц сетей")
+        }
+        if (family === true) {
+            relaxReq.push("Семейный")
+        }
+        if (relaxReq.length !== 0){
+            selectedOption[iterator] = relaxReq;
+            setRelax(relaxReq);
+        }
+        console.log(`set ans = ${selectedOption[iterator]}`)
+        next_quest()
+    }
+
+
+    function next_quest(){
+
+        if (selectedOption[iterator] !== null) {
+            if (quest[iterator]["type"] === 2 && selectedOption[iterator].length !== 0) {
+                setIterator(iterator + 1);
+                setIsAnswer(false);
+            }
+            if (quest[iterator]["type"] !== 2) {
+                if (iterator === 4) {
+                    console.log('go to request');
+                    request_date_words()
+                }
+                setIterator(iterator + 1);
+                setIsAnswer(false)
+            }
+        }
+    }
+    function back(){
+        setIsAnswer(false);
+        if (iterator !== 0){
+            setIterator(iterator-1);
+        }
+    }
+
+    function next_answer(){
+        setIsAnswer(true)
+    }
+
+    if(viewPDF === false){
+        if (isAnswer === false) {
+            return (
+                <div>
+                    <div className="wrapper">
+                        <h1 className="title"> {quest[iterator]['question']}</h1>
                     </div>
+                    <Button stretched={false} onClick={next_answer}> Ответить</Button>
+                    <Button stretched={false} onClick={back}> Назад</Button>
+                </div>
+            )
 
-                )
-            } else {
-                if (question['type'] === 1) {
+        }
+        if (isAnswer === true) {
+            if (quest[iterator]['type'] === 1) {
+                console.log(`iterator = ${iterator}`)
+                console.log(`quest[iterator]["answers"] = ${quest[iterator]["answers"]}`)
+                let tmp_ans;
+                if (iterator === 5) {
+                    tmp_ans = threeWords;
+                } else {
+                    tmp_ans = quest[iterator]["answers"];
+                }
+                console.log("tmp", iterator, tmp_ans);
+                if (tmp_ans === null) {
                     return (
-                        <div style={{minWidth: 100}}>
-
-                            <FormItem top={question['question']}>
-                                <Select
-                                    defaultValue={selectedOption[iterator]}
-                                    onChange={setSelectedOption[iterator]}
-                                    options={question["answers"]}
-                                />
-                            </FormItem>
-                            <Button stretched={false} onClick={next}> Подтвердить</Button>
-                        </div>
-                    )
-                } else if (question['type'] === 2) {
-                    return (
-                        <div style={{minWidth: 100}}>
-                            <FormItem top={question['question']}>
-                                <Checkbox onChange={(e) => {
-                                    setInteractive(e.target.checked);
-                                    console.log(e.target.checked)
-                                }}>
-                                    Интерактивный
-                                </Checkbox>
-                                <Checkbox onChange={(e) => {
-                                    setCulture(e.target.checked);
-                                    console.log(e.target.checked)
-                                }}>
-                                    Культурный
-                                </Checkbox>
-                                <Checkbox onChange={(e) => {
-                                    setHistory(e.target.checked);
-                                    console.log(e.target.checked)
-                                }}>
-                                    Исторический
-                                </Checkbox>
-                                <Checkbox onChange={(e) => {
-                                    setRel(e.target.checked);
-                                    console.log(e.target.checked)
-                                }}>
-                                    Релакс
-                                </Checkbox>
-                                <Checkbox onChange={(e) => {
-                                    setSocMedia(e.target.checked);
-                                    console.log(e.target.checked)
-                                }}>
-                                    Конент. для соц сетей
-                                </Checkbox>
-                                <Checkbox onChange={(e) => {
-                                    setFamily(e.target.checked);
-                                    console.log(e.target.checked)
-                                }}>
-                                    Семейный
-                                </Checkbox>
-                            </FormItem>
-                            <Button stretched={false} onClick={next}> Далее</Button>
+                        <div>
+                            <p> Подождите</p>
                         </div>
                     )
                 } else {
                     return (
                         <div style={{minWidth: 100}}>
-                            <FormItem top={question['question']}>
-                                <input type="text" name="name"/>
+                            <FormItem top={quest[iterator]['question']}>
+                                <Select
+                                    defaultValue={selectedOption[iterator]}
+                                    onChange={setSelectedOption[iterator]}
+                                    options={tmp_ans}
+                                />
                             </FormItem>
-                            <Button stretched={false} onClick={next}> Далее</Button>
+                            {iterator === 5 &&
+                                <div>
+                                    <Button onClick={choose_word}> Подтвердить</Button>
+                                    <Button stretched={false} onClick={back}> Назад</Button>
+                                </div>
+                            }
+                            {iterator !== 5 &&
+                                <div>
+                                    <Button onClick={next_quest}> Подтвердить</Button>
+                                    <Button stretched={false} onClick={back}> Назад</Button>
+                                </div>
+                            }
                         </div>
                     )
                 }
             }
-        } else {
-            if (threeWords === null) {
-                return (
-                    <div>
-                        Подождите
-                    </div>
-                )
-            } else {
+            if (quest[iterator]['type'] === 2) {
                 return (
                     <div style={{minWidth: 100}}>
-
-                        <FormItem top={"Выберите слово, которое будет ассоциироваться с предстоящим Дэйтом"}>
-                            <Select
-                                defaultValue={word}
-                                onChange={setWord}
-                                options={threeWords}
-                            />
+                        <FormItem top={quest[iterator]['question']}>
+                            <Checkbox onChange={(e) => {
+                                setInteractive(e.target.checked);
+                                console.log(e.target.checked)
+                            }}>
+                                Интерактивный
+                            </Checkbox>
+                            <Checkbox onChange={(e) => {
+                                setCulture(e.target.checked);
+                                console.log(e.target.checked)
+                            }}>
+                                Культурный
+                            </Checkbox>
+                            <Checkbox onChange={(e) => {
+                                setHistory(e.target.checked);
+                                console.log(e.target.checked)
+                            }}>
+                                Исторический
+                            </Checkbox>
+                            <Checkbox onChange={(e) => {
+                                setRel(e.target.checked);
+                                console.log(e.target.checked)
+                            }}>
+                                Релакс
+                            </Checkbox>
+                            <Checkbox onChange={(e) => {
+                                setSocMedia(e.target.checked);
+                                console.log(e.target.checked)
+                            }}>
+                                Конент. для соц сетей
+                            </Checkbox>
+                            <Checkbox onChange={(e) => {
+                                setFamily(e.target.checked);
+                                console.log(e.target.checked)
+                            }}>
+                                Семейный
+                            </Checkbox>
                         </FormItem>
-                        <Button stretched={false} onClick={choose_word}> Подтвердить</Button>
+                        <Button onClick={set_ans}> Далее</Button>
+                        <Button stretched={false} onClick={back}> Назад</Button>
                     </div>
                 )
             }
@@ -279,10 +302,18 @@ export default function Questions(){
             )
         } else{
             return (
-                <iframe src={url} width="655" height="583" allow="autoplay"></iframe>
+                <div>
+                    <iframe src={url} width="655" height="583" allow="autoplay"/>
+                    <Button onClick={restart}> Начать с начала</Button>
+                </div>
+
             )
         }
     }
+
+
+
+
 
 
 }

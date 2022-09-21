@@ -4,9 +4,48 @@ import IdeasGrid from "./Grid/IdeasGrid";
 import './gridstyles.css'
 
 export default function Photo (props) {
-    const [places, setPlaces] = useState(null)
-    useEffect(() =>{
-        fetch('https://devteamapp.space/get_main_img', {
+    const [places, setPlaces] = useState(null);
+    const [photo, setPhoto] = useState(null);
+    const [back , setBack] = useState(true);
+
+
+
+
+    function goBack(){
+        console.log('go back')
+        setBack(!back);
+
+            fetch('https://devteamapp.space/get_main_img', {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }).then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                console.log(data)
+                let keys = Object.keys(data);
+                let values = []
+                for (let i = 0; i < keys.length; i++){
+                    let tmp = {
+                        "name": keys[i],
+                        "image": "https://devteamapp.space/get_photo/"+data[keys[i]],
+                        "link": "https://devteamapp.space/get_place_images/"+keys[i]+"/place"
+                    }
+                    values.push(tmp);
+                }
+
+                setPlaces(values);
+                setPhoto(null);
+            })
+    }
+
+
+    function setter(link){
+        console.log('I`m working');
+        setBack(!back);
+        console.log(link)
+        fetch(link, {
             method: "POST",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -21,30 +60,49 @@ export default function Photo (props) {
                 let tmp = {
                     "name": keys[i],
                     "image": "https://devteamapp.space/get_photo/"+data[keys[i]],
-                    "link": "https://devteamapp.space/get_place_images/"+keys[i]+"/place"
+
                 }
                 values.push(tmp);
             }
-
-            setPlaces(values)
+            console.log(values)
+            setPhoto(values);
+            setPlaces(null);
         })
+    }
+    useEffect(() =>{
+       goBack();
     }, [])
     return (
         <Panel id={props.id}>
-            <PanelHeader
-                left={<PanelHeaderBack onClick={props.go} data-to="home"/>}
-            >
-                Идеи для фотографии
-            </PanelHeader>
+            {back === false &&
+                <PanelHeader
+                    left={<PanelHeaderBack onClick={props.go} data-to="home"/>}
+                >
+                    Идеи для фотографии
+                </PanelHeader>
+            }
+            {back === true &&
+                <PanelHeader
+                    left={<PanelHeaderBack onClick={goBack} data-to="home"/>}
+                >
+                    Идеи для фотографии
+                </PanelHeader>
+            }
+
             <div class="photodiv">
-                {places === null &&
+                {places === null && photo === null &&
                     <div>
                         подождите
                     </div>
                 }
                 {places !== null &&
                     <div>
-                        <IdeasGrid data={places} setData={setPlaces} ex={false}/>
+                        <IdeasGrid data={places} setter={setter} ex={false}/>
+                    </div>
+                }
+                {photo !== null &&
+                    <div>
+                        <IdeasGrid data={photo} ex={true}/>
                     </div>
                 }
             </div>

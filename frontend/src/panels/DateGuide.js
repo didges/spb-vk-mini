@@ -5,7 +5,11 @@ import Questions from "./selectComponent/Questions";
 import './guidestyles.css';
 
 export default function DateGuide(props) {
+const [startGuide, setStartGuide] = useState(false)
 
+function start(){
+    setStartGuide(true);
+}
 
     return (
         <Panel id={props.id}>
@@ -14,9 +18,21 @@ export default function DateGuide(props) {
             >
                 DateGuide
             </PanelHeader>
-            <div class="guidediv">
-                <Questions></Questions>
+            <div>
+                {startGuide !== true &&
+                    <div className="guidediv">
+                        <Button onClick={start} className="buttonGuide">
+                            Начнем
+                        </Button>
+                    </div>
+                }
+                {startGuide === true &&
+                    <div>
+                        <Questions></Questions>
+                    </div>
+                }
             </div>
+
         </Panel>
     )
 }
