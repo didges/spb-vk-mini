@@ -34,7 +34,7 @@ export default function Kudago (props) {
             <PanelHeader
                 left={<PanelHeaderBack onClick={props.go} data-to="home"/>}
             >
-                Актуальные события
+                Афиша
             </PanelHeader>
             <div class="photodiv">
                 {places === null &&

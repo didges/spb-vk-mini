@@ -11,9 +11,11 @@ const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    marginLeft: 30,
-    width: 230,
-    height: 230,
+    marginLeft: 40,
+    marginTop: 10,
+    marginBottom: 5,
+    width: 300,
+    height: 260,
 }));
 
 
@@ -50,18 +52,18 @@ export default function IdeasGrid(props){
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 12 }}>
                 {Array.from(Array(data.length)).map((_, index) => (
                     <Grid item xs={2} sm={4} md={4} key={index}>
                         <Item>
                             {!props.ex &&
                                 <a href="#" onClick={() => update(data[index]["link"], setData)}>
-                                    <img src={data[index]["image"]} width={220} height={220}/>
+                                    <img src={data[index]["image"]} width={260} height={260}/>
                                 </a>
                             }
                             {props.ex &&
                                 <a target="_blank" href={props.data[index]["link"]}>
-                                    <img src={props.data[index]["image"]} width={220} height={220}/>
+                                    <img src={props.data[index]["image"]} width={260} height={260}/>
                                 </a>
                             }
                         </Item>

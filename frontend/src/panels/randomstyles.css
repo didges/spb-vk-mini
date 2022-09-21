@@ -2,12 +2,13 @@
  background-image: url("../background/randomstart.png");
  background-repeat: no-repeat;
  background-size: contain;
- width: 670px;
- height: 589px;
+ width: 410px;
+ height: 850px;
 
 }
 
 .randomdata {
+    margin-top: 5px;
     text-align: center;
     border: 3px solid black;
     border-radius: 25px;
@@ -16,16 +17,15 @@
 
 #randbut:nth-of-type(1) {
     position: fixed;
-    left: 390px;
-    top: 285px;
+    left: 15px;
+    top: 470px;
 }
 
 
 #fixedsvg {
-    display: none;
     position: absolute;
     top: 7px;
-    left: 590px;
+    left: 250px;
     z-index: 3;
 }
 
