@@ -6,13 +6,14 @@ import React, {useState} from "react";
 
 
 const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'rgba(101,99,99,0.5)',
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'rgba(101,99,99,0.3)',
     ...theme.typography.body2,
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    width: 220,
-    height: 210,
+    marginLeft: 30,
+    width: 230,
+    height: 230,
 }));
 
 
@@ -55,12 +56,12 @@ export default function IdeasGrid(props){
                         <Item>
                             {!props.ex &&
                                 <a href="#" onClick={() => update(data[index]["link"], setData)}>
-                                    <img src={data[index]["image"]} width={200} height={200}/>
+                                    <img src={data[index]["image"]} width={220} height={220}/>
                                 </a>
                             }
                             {props.ex &&
                                 <a target="_blank" href={props.data[index]["link"]}>
-                                    <img src={props.data[index]["image"]} width={200} height={200}/>
+                                    <img src={props.data[index]["image"]} width={220} height={220}/>
                                 </a>
                             }
                         </Item>

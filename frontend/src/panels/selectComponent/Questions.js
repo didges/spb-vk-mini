@@ -7,7 +7,7 @@ const quest = [
 
     {
         "question": "Сколько потратим сегодня?",
-        "answers": [{value: "около 1", label: "около 1"}, {value: "около 2", label: "около 2"}, {value: "около 3", label: "около 3"}, {value: "3 и больше", label: "3 и больше"}],
+        "answers": [{value: "около 1000 рублей", label: "около 1000 рублей"}, {value: "около 2000 рублей", label: "около 2000 рублей"}, {value: "около 3000 рублей", label: "около 3000 рублей"}, {value: "3000 рублей и больше", label: "3000 рублей и больше"}],
         "type": 1
     },
     {
@@ -21,7 +21,7 @@ const quest = [
     },
     {
         "question": "Как долго погуляем?",
-        "answers": [{value: '2', label: '2'}, {value: '4', label: '4'}, {value: '6', label: '6'}],
+        "answers": [{value: '2 часа', label: '2 часа'}, {value: '4 часа', label: '4 часа'}, {value: '6 часов', label: '6 часов'}],
         "type": 1
     },
     {
@@ -30,7 +30,7 @@ const quest = [
         "type": 1
     },
     {
-        "question": "Осталось выбрать всего лишь слово",
+        "question": "Осталось выбрать всего лишь слово, которое будет ассоциироваться с предстоящим Дэйтом",
         "type": 3
     }
 ]
@@ -200,37 +200,37 @@ export default function Questions(){
                                     setInteractive(e.target.checked);
                                     console.log(e.target.checked)
                                 }}>
-                                    интерактивный
+                                    Интерактивный
                                 </Checkbox>
                                 <Checkbox onChange={(e) => {
                                     setCulture(e.target.checked);
                                     console.log(e.target.checked)
                                 }}>
-                                    культурный
+                                    Культурный
                                 </Checkbox>
                                 <Checkbox onChange={(e) => {
                                     setHistory(e.target.checked);
                                     console.log(e.target.checked)
                                 }}>
-                                    исторический
+                                    Исторический
                                 </Checkbox>
                                 <Checkbox onChange={(e) => {
                                     setRel(e.target.checked);
                                     console.log(e.target.checked)
                                 }}>
-                                    релакс
+                                    Релакс
                                 </Checkbox>
                                 <Checkbox onChange={(e) => {
                                     setSocMedia(e.target.checked);
                                     console.log(e.target.checked)
                                 }}>
-                                    конент. для соц сетей
+                                    Конент. для соц сетей
                                 </Checkbox>
                                 <Checkbox onChange={(e) => {
                                     setFamily(e.target.checked);
                                     console.log(e.target.checked)
                                 }}>
-                                    семейный
+                                    Семейный
                                 </Checkbox>
                             </FormItem>
                             <Button stretched={false} onClick={next}> Далее</Button>
@@ -258,7 +258,7 @@ export default function Questions(){
                 return (
                     <div style={{minWidth: 100}}>
 
-                        <FormItem top={"Выберите слово"}>
+                        <FormItem top={"Выберите слово, которое будет ассоциироваться с предстоящим Дэйтом"}>
                             <Select
                                 defaultValue={word}
                                 onChange={setWord}
@@ -279,7 +279,7 @@ export default function Questions(){
             )
         } else{
             return (
-                <iframe src={url} width="550" height="500" allow="autoplay"></iframe>
+                <iframe src={url} width="655" height="583" allow="autoplay"></iframe>
             )
         }
     }

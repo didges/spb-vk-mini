@@ -1,23 +1,31 @@
 #randomdiv {
  background-image: url("../background/randomstart.png");
- background-color: #cccccc;
  background-repeat: no-repeat;
  background-size: contain;
- width: 550px;
- height: 439px;
+ width: 670px;
+ height: 589px;
+
 }
 
 .randomdata {
- text-align: center;
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 25px;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .1);
 }
 
 #randbut:nth-of-type(1) {
-    position: absolute;
-    left: 250px;
-
+    position: fixed;
+    left: 390px;
+    top: 285px;
 }
 
 
-PanelHeader {
+#fixedsvg {
     display: none;
+    position: absolute;
+    top: 7px;
+    left: 590px;
+    z-index: 3;
 }
+

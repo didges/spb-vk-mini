@@ -6,13 +6,16 @@ import React, {useState} from "react";
 
 
 const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'rgba(101,99,99,0.5)',
+    backgroundColor: theme.palette.mode === 'dark' ? '#b2b2b2' : 'rgba(178,178,178,0.35)',
     ...theme.typography.body2,
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-
-    height: 220
+    height: 200,
+    marginBottom: 10,
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10
 }));
 
 
@@ -54,10 +57,10 @@ export default function ImageGrid(props){
                     <Grid item xs={2} sm={4} md={4} key={index}>
                         <Item>
                             {!props.ex &&
-                                <img src={data[index]["image"]} width={160} height={160}/>
+                                <img src={data[index]["image"]} width={230} height={160}/>
                             }
                             {props.ex &&
-                                <img src={props.data[index]["image"]} width={160} height={160}/>
+                                <img src={props.data[index]["image"]} width={230} height={160}/>
                             }
                             {props.ex &&
                                 <div>

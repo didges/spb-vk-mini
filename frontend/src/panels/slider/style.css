@@ -18,7 +18,7 @@
     color: #adadad;
     height: 100%;
     width: 80px;
-    min-width: 80px;
+    min-width: 90px;
     text-align: left;
 
     transition: width, left, right, 0.3s;
@@ -202,7 +202,7 @@
 .pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item > .pro-item-content {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; }
+ }
 
 .pro-sidebar .pro-menu {
     padding-top: 10px;
@@ -227,7 +227,11 @@
 .pro-sidebar .pro-menu a:hover {
     color: #d8d8d8; }
 .pro-sidebar .pro-menu .pro-menu-item {
-    font-size: 10px; }
+    font-size: 10px;
+     &p{
+        margin-left: -15px;
+     }
+}
 .pro-sidebar .pro-menu .pro-menu-item.active {
     color: #d8d8d8; }
 .pro-sidebar .pro-menu .pro-menu-item .suffix-wrapper {
@@ -408,13 +412,8 @@
     border-top: 7px solid transparent;
     border-bottom: 7px solid transparent; }
 
-.popper-element[data-popper-placement^='left'] > .popper-arrow {
-    right: 0;
-    border-right: 7px solid #8CABD7; }
 
-.popper-element[data-popper-placement^='right'] > .popper-arrow {
-    left: 0;
-    border-left: 7px solid #8CABD7; }
+
 
 .react-slidedown {
     height: 0;

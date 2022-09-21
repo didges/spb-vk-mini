@@ -4,7 +4,11 @@ import "./randomstyles.css";
 
 function changeBgImg(){
     var block = document.getElementById('randomdiv');
-    block.style.backgroundImage = "url('https://drive.google.com/uc?export=download&id=1O0QKaVkQEG0OP0GJLmeqUVoDTO2pQf1n')";
+    block.style.backgroundImage = 'none';
+    block.style.backgroundColor = 'rgba(209, 219, 234, 0.5)';
+    var but = document.getElementById('randbut');
+    but.style.left = '270px';
+    but.style.top = '420px';
 }
 
 
@@ -31,18 +35,17 @@ export default function Random (props) {
                 Рандомное место
             </PanelHeader>
             <div id="randomdiv">
+                {   place !== null && <div class="randomdata">
+                    <p>{place["name"]}</p>
+                    <p>{place["desc"]}</p>
+                    <p>Адрес - {place["address"]}</p>
+                    <p>Средняя цена - {place["cost"]}</p>
+                    <p>Станция метро - {place["metro"]}</p>
+                    <p>Ссылка - <a target="_blank" href={place["link"]}>{place["link"]}</a></p>
+                    </div>
+                }
 
-            {   place !== null && <div class="randomdata">
-                <p>{place["name"]}</p>
-                <p>Описание - {place["desc"]}</p>
-                <p>Адрес - {place["address"]}</p>
-                <p>Цена - {place["cost"]}</p>
-                <p>Станция метро - {place["metro"]}</p>
-                <p>Ссылка - <a target="_blank" href={place["link"]}>{place["link"]}</a></p>
-                </div>
-            }
-
-            <Button id="randbut" onClick={click}>Сгенерировать</Button>
+                <Button id="randbut" onClick={click}>Сгенерировать</Button>
             </div>
         </Panel>
     );
