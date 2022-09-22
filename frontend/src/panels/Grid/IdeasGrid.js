@@ -18,33 +18,6 @@ const Item = styled(Paper)(({ theme }) => ({
     height: 260,
 }));
 
-
-function update(link, setData){
-    console.log(link)
-    fetch(link, {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-    }).then(function(response) {
-        return response.json();
-    }).then(function(data) {
-        console.log(data)
-        let keys = Object.keys(data);
-        let values = []
-        for (let i = 0; i < keys.length; i++){
-            let tmp = {
-                "name": keys[i],
-                "image": "https://devteamapp.space/get_photo/"+data[keys[i]],
-
-            }
-            values.push(tmp);
-        }
-        console.log(values)
-        setData(values)
-    })
-}
-
 export default function IdeasGrid(props){
     console.log(props.data)
     const [data, setData] = useState(props.data)
@@ -57,7 +30,7 @@ export default function IdeasGrid(props){
                     <Grid item xs={2} sm={4} md={4} key={index}>
                         <Item>
                             {!props.ex &&
-                                <a href="#" onClick={() => update(data[index]["link"], setData)}>
+                                <a href="#" onClick={() => props.setter(data[index]["link"], setData)}>
                                     <img src={data[index]["image"]} width={260} height={260}/>
                                 </a>
                             }

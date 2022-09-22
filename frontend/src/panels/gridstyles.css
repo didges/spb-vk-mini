@@ -23,3 +23,9 @@
       color: red;
     }
 }
+
+.buttonGuide{
+    position: fixed;
+    top: 330px;
+    left: 250px;
+}
