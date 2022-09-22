@@ -8,7 +8,8 @@ function changeBgImg(){
     block.style.backgroundColor = 'rgba(209, 219, 234, 0.5)';
     var but = document.getElementById('randbut');
     but.style.left = '270px';
-    but.style.top = '420px';
+    but.style.top = '25px';
+    but.style.position = 'relative';
 }
 
 

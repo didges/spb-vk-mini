@@ -198,7 +198,7 @@ export default function Questions() {
                         <h1 className="title"> {quest[iterator]['question']}</h1>
                     </div>
                     <Button stretched={false} onClick={next_answer}> Ответить</Button>
-                    <Button stretched={false} onClick={back}> Назад</Button>
+                    <Button id="backbut" stretched={false} onClick={back}> Назад</Button>
                 </div>
             )
 
@@ -233,13 +233,13 @@ export default function Questions() {
                             {iterator === 5 &&
                                 <div>
                                     <Button onClick={choose_word}> Подтвердить</Button>
-                                    <Button stretched={false} onClick={back}> Назад</Button>
+                                    <Button id="backbut" stretched={false} onClick={back}> Назад</Button>
                                 </div>
                             }
                             {iterator !== 5 &&
                                 <div>
                                     <Button onClick={next_quest}> Подтвердить</Button>
-                                    <Button stretched={false} onClick={back}> Назад</Button>
+                                    <Button id="backbut" stretched={false} onClick={back}> Назад</Button>
                                 </div>
                             }
                         </div>
@@ -288,7 +288,7 @@ export default function Questions() {
                             </Checkbox>
                         </FormItem>
                         <Button onClick={set_ans}> Далее</Button>
-                        <Button stretched={false} onClick={back}> Назад</Button>
+                        <Button id="backbut" stretched={false} onClick={back}> Назад</Button>
                     </div>
                 )
             }
@@ -303,7 +303,7 @@ export default function Questions() {
         } else{
             return (
                 <div>
-                    <iframe src={url} width="655" height="583" allow="autoplay"/>
+                    <iframe src={url} width="666" height="550" allow="autoplay"/>
                     <Button onClick={restart}> Начать с начала</Button>
                 </div>
 
