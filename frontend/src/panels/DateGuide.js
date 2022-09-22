@@ -16,7 +16,7 @@ function start(){
             <PanelHeader
                 left={<PanelHeaderBack onClick={props.go} data-to="home"/>}
             >
-                DateGuide
+                Выбор гида
             </PanelHeader>
             <div>
                 {startGuide !== true &&
