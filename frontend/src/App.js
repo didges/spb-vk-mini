@@ -30,6 +30,10 @@ const App = () => {
 		fetchData();
 	}, []);
 
+	function changePanel(name){
+		setActivePanel(name);
+	}
+
 	const go = e => {
 		setActivePanel(e.currentTarget.dataset.to);
 	};
@@ -48,7 +52,7 @@ const App = () => {
 								<Photo id='photo' go={go} fetchedUser={fetchedUser} />
 							</View>
 						</SplitCol>
-						<Slider go={go}/>
+						<Slider go={changePanel}/>
 					</SplitLayout>
 				</AppRoot>
 			</AdaptivityProvider>

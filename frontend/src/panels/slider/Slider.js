@@ -1,51 +1,57 @@
-import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, SyntheticEvent} from 'react';
 import {SvgSelector} from './SvgSelector'
-import './style.css';
-
-var a = true;
-
-function menuclick(){
-    var block = document.getElementById('sidebar');
-    if (a == false){
-        block.style.display = "none";
-        a = true;
-    }
-    else{
-        block.style.display = "block";
-        a = false;
-    }
-}
+import './slider.css';
+import { Paper } from '@mui/material';
 
 
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import HomeIcon from '@mui/icons-material/Home';
+import CameraIcon from '@mui/icons-material/Camera';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import ImageIcon from '@mui/icons-material/Image';
 export default function Slider({go}){
+    const [value, setValue] = useState('home');
+
+
+    const handleChange = (event: SyntheticEvent, newValue: String) => {
+        console.log(newValue)
+        setValue(newValue);
+        go(newValue);
+    }
     return(
-        <div class="sidemenu">
-            <div id="fixedsvg"><button onClick={menuclick}><SvgSelector id="menu"/></button></div>
-            <ProSidebar id="sidebar">
-                <Menu iconShape="square">
-                    <MenuItem  onClick={go} data-to={'home'}>
-                        <SvgSelector id="home"/>
-                        <p>Главная</p>
-                    </MenuItem>
-                    <MenuItem onClick={go} data-to={'dg'}>
-                        <SvgSelector id="guide"/>
-                        <p>Выбор гида</p>
-                    </MenuItem>
-                    <MenuItem onClick={go} data-to={'kudago'}>
-                        <SvgSelector id="poster"/>
-                        <p>Афиша</p>
-                    </MenuItem>
-                    <MenuItem onClick={go} data-to={'photo'}>
-                        <SvgSelector id="ideas"/>
-                        <p>Идеи для фото</p>
-                    </MenuItem>
-                    <MenuItem  onClick={go} data-to={'random'}>
-                        <SvgSelector id="random"/>
-                        <p>Случайное место</p>
-                    </MenuItem>
-                </Menu>
-            </ProSidebar>
+        <div class="slider">
+            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} >
+                <BottomNavigation sx={{ width: 400 , height:80}} value={value} onChange={handleChange} >
+                    <BottomNavigationAction
+                        label="Главная"
+                        value="home"
+                        icon={<HomeIcon />}
+                    />
+                    <BottomNavigationAction
+                        label="Гид"
+                        value="dg"
+                        icon={<ImageIcon />}
+                    />
+                    <BottomNavigationAction
+                        label="Афиша"
+                        value="kudago"
+                        icon={<CalendarMonthIcon />}
+                    />
+                    <BottomNavigationAction
+                        label="Идеи"
+                        value="photo"
+                        icon={<CameraAltIcon />}
+                    />
+                    <BottomNavigationAction
+                        label="Рандом"
+                        value="random"
+                        icon={<CameraIcon />}
+                    />
+                </BottomNavigation>
+
+            </Paper>
         </div>
     )
 }
