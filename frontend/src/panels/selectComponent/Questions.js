@@ -31,7 +31,7 @@ const quest = [
         "type": 1
     },
     {
-        "question": "Осталось выбрать всего лишь слово, которое будет ассоциироваться с предстоящим Дэйтом",
+        "question": "Осталось выбрать тему Дэйта",
         "type": 1
     }
 ]
@@ -297,8 +297,8 @@ export default function Questions() {
             )
         } else{
             return (
-                <div>
-                    <iframe src={url} width="410" height="850" allow="autoplay"/>
+                <div class="dgframe">
+                    <iframe src={url} width="100%" height="100%" allow="autoplay"/>
                     <Button onClick={restart}> Начать с начала</Button>
                 </div>
 

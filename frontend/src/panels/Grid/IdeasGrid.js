@@ -11,11 +11,11 @@ const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    marginLeft: 40,
+    marginLeft: 20,
     marginTop: 10,
     marginBottom: 5,
-    width: 300,
-    height: 260,
+    height: 250,
+    marginRight: 20
 }));
 
 export default function IdeasGrid(props){
@@ -31,12 +31,12 @@ export default function IdeasGrid(props){
                         <Item>
                             {!props.ex &&
                                 <a href="#" onClick={() => props.setter(data[index]["link"], setData)}>
-                                    <img src={data[index]["image"]} width={260} height={260}/>
+                                    <img src={data[index]["image"]} width={250} height={250}/>
                                 </a>
                             }
                             {props.ex &&
                                 <a target="_blank" href={props.data[index]["link"]}>
-                                    <img src={props.data[index]["image"]} width={260} height={260}/>
+                                    <img src={props.data[index]["image"]} width={250} height={250}/>
                                 </a>
                             }
                         </Item>

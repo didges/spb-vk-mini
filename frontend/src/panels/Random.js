@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import {Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar, PanelHeaderBack} from '@vkontakte/vkui';
 import "./randomstyles.css";
+import rnd from '../background/randomstart.png'
 
 function changeBgImg(){
+    var img = document.getElementById('rnd');
+    img.style.display = 'none';
     var block = document.getElementById('randomdiv');
-    block.style.backgroundImage = 'none';
     block.style.backgroundColor = 'rgba(209, 219, 234, 0.5)';
+    block.style.minHeight = '100vh';
     var but = document.getElementById('randbut');
     but.style.position = 'relative';
     but.style.left = '135px';
@@ -35,6 +38,8 @@ export default function Random (props) {
             <PanelHeader left={<PanelHeaderBack onClick={props.go} data-to="home"/>}>
                 Рандомное место
             </PanelHeader>
+            <img src={rnd} id="rnd"/>
+
             <div id="randomdiv">
                 {   place !== null && <div class="randomdata">
                     <p>{place["name"]}</p>

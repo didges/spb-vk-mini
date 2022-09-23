@@ -1,7 +1,4 @@
-.maindiv {
- background-image: url("../background/main_page.png");
- background-color: #cccccc;
- background-size: contain;
- width: 410px;
- height: 850px;
+.responsive {
+    width: 100%;
+    height: auto;
 }

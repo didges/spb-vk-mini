@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import { Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar } from '@vkontakte/vkui';
 import Slider from "./slider/Slider";
 import './homestyles.css';
+import main_page from '../background/main_page.png'
 
 const Home = ({ id, go, fetchedUser }) => (
 
 	<Panel id={id}>
 	<div class="maindiv">
-
+        <img src={main_page} alt="DateGuide_description" class="responsive"/>
     </div>
 	</Panel>
 

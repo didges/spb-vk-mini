@@ -3,6 +3,7 @@ import {Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar, PanelHeade
 import axios from "axios";
 import Questions from "./selectComponent/Questions";
 import './guidestyles.css';
+import dg from '../background/guide.png'
 
 export default function DateGuide(props) {
 const [startGuide, setStartGuide] = useState(false)
@@ -20,7 +21,8 @@ function start(){
             </PanelHeader>
             <div>
                 {startGuide !== true &&
-                    <div className="guidediv">
+                    <div>
+                        <img src={dg} alt="dg" class="dgphoto"/>
                         <Button onClick={start} className="buttonGuide">
                             Начнем
                         </Button>
