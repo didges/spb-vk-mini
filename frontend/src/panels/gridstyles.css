@@ -1,4 +1,5 @@
 .photodiv {
+
     background-color: #D1DBEA;
 
     a {
@@ -22,4 +23,11 @@
     a:active {
       color: red;
     }
+}
+
+.loader {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar, PanelHeaderBack} from '@vkontakte/vkui';
 import ImageGrid from "./Grid/ImageGrid";
-import './gridstyles.css'
+import { TailSpin } from 'react-loader-spinner';
+import './gridstyles.css';
 
 export default function Kudago (props) {
     const [places, setPlaces] = useState(null)
@@ -38,8 +39,8 @@ export default function Kudago (props) {
             </PanelHeader>
             <div class="photodiv">
                 {places === null &&
-                    <div>
-                        подождите
+                    <div className="loader">
+                        <TailSpin color="#067185"/>
                     </div>
                 }
                 {places !== null &&
