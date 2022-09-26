@@ -7,8 +7,10 @@ import './homestyles.css';
 import main_page from '../background/main_page.png'
 
 const Home = ({ id, go, fetchedUser }) => (
-
 	<Panel id={id}>
+	<PanelHeader>
+        Главная
+    </PanelHeader>
 	<div class="maindiv">
         <img src={main_page} alt="DateGuide_description" class="responsive"/>
     </div>

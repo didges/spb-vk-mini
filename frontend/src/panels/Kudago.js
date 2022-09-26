@@ -44,10 +44,11 @@ export default function Kudago (props) {
                     </div>
                 }
                 {places !== null &&
-                <div>
+                <div >
                     <ImageGrid data={places} ex={true}/>
                 </div>
                 }
+                <div class="invisible"></div>
             </div>
         </Panel>
     );

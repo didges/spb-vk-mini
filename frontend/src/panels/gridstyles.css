@@ -25,6 +25,10 @@
     }
 }
 
+.invisible{
+    height: 80px;
+}
+
 .loader {
     min-height: 100vh;
     display: flex;

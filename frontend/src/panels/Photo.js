@@ -100,6 +100,7 @@ export default function Photo (props) {
                         <IdeasGrid data={photo} ex={true}/>
                     </div>
                 }
+            <div class="invisible"></div>
             </div>
         </Panel>
     );

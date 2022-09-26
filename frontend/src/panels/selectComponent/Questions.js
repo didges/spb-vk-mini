@@ -220,6 +220,7 @@ export default function Questions() {
                         <div style={{minWidth: 100}}>
                             <FormItem top={quest[iterator]['question']}>
                                 <Select
+                                    className="selectform"
                                     defaultValue={selectedOption[iterator]}
                                     onChange={setSelectedOption[iterator]}
                                     options={tmp_ans}
