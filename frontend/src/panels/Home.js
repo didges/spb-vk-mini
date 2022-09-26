@@ -8,6 +8,7 @@ import './homestyles.css';
 const Home = ({ id, go, fetchedUser }) => (
 
 	<Panel id={id}>
+    <PanelHeader>Главная</PanelHeader>
 	<div class="maindiv">
 
     </div>

@@ -31,7 +31,7 @@ const quest = [
         "type": 1
     },
     {
-        "question": "Осталось выбрать всего лишь слово, которое будет ассоциироваться с предстоящим Дэйтом",
+        "question": "Осталось выбрать тему Дэйта",
         "type": 1
     }
 ]
@@ -225,6 +225,7 @@ export default function Questions() {
                         <div style={{minWidth: 100}}>
                             <FormItem top={quest[iterator]['question']}>
                                 <Select
+                                    className="selectform"
                                     defaultValue={selectedOption[iterator]}
                                     onChange={setSelectedOption[iterator]}
                                     options={tmp_ans}

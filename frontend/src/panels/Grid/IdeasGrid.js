@@ -13,7 +13,9 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
     marginLeft: 30,
     width: 230,
-    height: 230,
+    height: 220,
+    marginBottom: 10,
+    marginTop: 10,
 }));
 
 export default function IdeasGrid(props){
