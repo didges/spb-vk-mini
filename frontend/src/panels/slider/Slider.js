@@ -11,19 +11,18 @@ import CameraIcon from '@mui/icons-material/Camera';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ImageIcon from '@mui/icons-material/Image';
-export default function Slider({go}){
-    const [value, setValue] = useState('home');
+export default function Slider(props){
+
 
 
     const handleChange = (event: SyntheticEvent, newValue: String) => {
         console.log(newValue)
-        setValue(newValue);
-        go(newValue);
+        props.go(newValue);
     }
     return(
         <div class="slider">
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} >
-                <BottomNavigation value={value} onChange={handleChange} >
+                <BottomNavigation value={props.value} onChange={handleChange} >
                     <BottomNavigationAction
                         label="Главная"
                         value="home"

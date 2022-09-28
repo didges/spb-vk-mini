@@ -30,7 +30,7 @@ export default function IdeasGrid(props){
                     <Grid item xs={2} sm={4} md={4} key={index}>
                         <Item>
                             {!props.ex &&
-                                <a href="#" onClick={() => props.setter(data[index]["link"], setData)}>
+                                <a onClick={() => props.setter(data[index]["link"], setData)}>
                                     <img src={data[index]["image"]} width={250} height={250}/>
                                 </a>
                             }

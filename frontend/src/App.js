@@ -15,7 +15,7 @@ const App = () => {
 	const [fetchedUser, setUser] = useState(null);
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
 	const [history, setHistory] = useState(['home']) // Заносим начальную панель в массив историй.
-
+	const [val, setVal] = useState('home');
 	useEffect(() => {
 		bridge.subscribe(({ detail: { type, data }}) => {
 			if (type === 'VKWebAppUpdateConfig') {
@@ -44,7 +44,8 @@ const App = () => {
 			bridge.send("VKWebAppClose", {"status": "success"}); // Отправляем bridge на закрытие сервиса.
 		} else if( history.length > 1 ) { // Если в массиве больше одного значения:
 			history.pop() // удаляем последний элемент в массиве.
-			setActivePanel( history[history.length - 1] ) // Изменяем массив с иторией и меняем активную панель.
+			setActivePanel( history[history.length - 1] )
+			setVal(history[history.length - 1])// Изменяем массив с иторией и меняем активную панель.
 		}
 	}
 	useEffect(() => {
@@ -55,7 +56,12 @@ const App = () => {
 		window.history.pushState( {panel: name}, name ); // Создаём новую запись в истории браузера
 		setActivePanel( name ); // Меняем активную панель
 		history.push( name ); // Добавляем панель в историю
-	};
+		setVal(name)
+	}
+
+	function setSliderValue(value){
+		setVal(value);
+	}
 
 	return (
 		<ConfigProvider scheme={scheme} isWebView={true}>
@@ -71,7 +77,7 @@ const App = () => {
 								<Photo id='photo' go={goToPage} fetchedUser={fetchedUser} />
 							</View>
 						</SplitCol>
-						<Slider go={changePanel}/>
+						<Slider go={goToPage} value={val}/>
 					</SplitLayout>
 				</AppRoot>
 			</AdaptivityProvider>

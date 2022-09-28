@@ -193,7 +193,10 @@ export default function Questions() {
                         <h1 className="title"> {quest[iterator]['question']}</h1>
                     </div>
                     <Button stretched={false} onClick={next_answer}> Ответить</Button>
-                    <Button id="backbut" stretched={false} onClick={back}> Назад</Button>
+                    {iterator !== 0 &&
+                        <Button id="backbut" stretched={false} onClick={back}> Назад</Button>
+                    }
+
                 </div>
             )
 
@@ -226,6 +229,7 @@ export default function Questions() {
                                     options={tmp_ans}
                                 />
                             </FormItem>
+
                             {iterator === 5 &&
                                 <div>
                                     <Button onClick={choose_word}> Подтвердить</Button>
