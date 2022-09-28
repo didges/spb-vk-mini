@@ -36,3 +36,19 @@
     align-items: center;
     justify-content: center;
 }
+
+
+#itemtext {
+    color: black;
+    font-size: 14px;
+}
+
+#divsvgtext{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.svglink {
+    display: fixed;
+}
