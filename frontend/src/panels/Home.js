@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar } from '@vkontakte/vkui';
+import {Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar, PanelHeaderBack} from '@vkontakte/vkui';
 import Slider from "./slider/Slider";
 import './homestyles.css';
 import main_page from '../background/main_page.png'
@@ -9,8 +9,10 @@ import main_page from '../background/main_page.png'
 const Home = ({ id, go, fetchedUser }) => (
 	<Panel id={id}>
 	<PanelHeader>
+		<PanelHeaderBack onClick={() => window.history.back()}/>
         Главная
     </PanelHeader>
+
 	<div class="maindiv">
         <img src={main_page} alt="DateGuide_description" class="responsive"/>
     </div>

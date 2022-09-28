@@ -1,58 +1,83 @@
-import React, {useState} from 'react';
-import {Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar, PanelHeaderBack} from '@vkontakte/vkui';
-import "./randomstyles.css";
-import rnd from '../background/randomstart.png'
-import {SvgSelector} from './slider/SvgSelector'
+import React, { useState, useEffect } from 'react';
+import bridge from '@vkontakte/vk-bridge';
+import { View, ScreenSpinner, AdaptivityProvider, AppRoot, ConfigProvider, SplitLayout, SplitCol } from '@vkontakte/vkui';
+import '@vkontakte/vkui/dist/vkui.css';
 
-function changeBgImg(){
-    var img = document.getElementById('rnd');
-    img.style.display = 'none';
-    var block = document.getElementById('randomdiv');
-    block.style.backgroundColor = 'rgba(209, 219, 234, 0.5)';
-    block.style.minHeight = '100vh';
-    var but = document.getElementById('randbut');
-    but.style.position = 'relative';
-    but.style.top = '25px';
-}
+import Home from './panels/Home';
+import Random from './panels/Random'
+import DateGuide from "./panels/DateGuide";
+import Photo from "./panels/Photo";
+import Kudago from "./panels/Kudago";
+import Slider from "./panels/slider/Slider"
+const App = () => {
+    const [scheme, setScheme] = useState('bright_light')
+    const [activePanel, setActivePanel] = useState('home');
+    const [fetchedUser, setUser] = useState(null);
+    const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
+    const [history, setHistory] = useState(['home'])
 
-
-export default function Random (props) {
-    const [place, setPlaces] = useState(null);
-    function click(){
-        fetch('https://devteamapp.space/dates_place', {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
+    useEffect(() => {
+        bridge.subscribe(({ detail: { type, data }}) => {
+            if (type === 'VKWebAppUpdateConfig') {
+                setScheme(data.scheme)
             }
-        }).then(function(response) {
-            return response.json();
-        }).then(function(data) {
-            console.log(data)
-            changeBgImg()
-            setPlaces(data)
-        })
+        });
 
+        async function fetchData() {
+            const user = await bridge.send('VKWebAppGetUserInfo');
+            setUser(user);
+            setPopout(null);
+        }
+        fetchData();
+    }, []);
+
+    function changePanel(name){
+        setActivePanel(name);
     }
+
+    const go = e => {
+        setActivePanel(e.currentTarget.dataset.to);
+    };
+
+    const goBack = () => {
+        if( history.length === 1 ) {  // Если в массиве одно значение:
+            bridge.send("VKWebAppClose", {"status": "success"}); // Отправляем bridge на закрытие сервиса.
+        } else if( history.length > 1 ) { // Если в массиве больше одного значения:
+            history.pop() // удаляем последний элемент в массиве.
+            setActivePanel( history[history.length - 1] ) // Изменяем массив с иторией и меняем активную панель.
+        }
+    }
+    function goToPage( name ) { // В качестве аргумента принимаем id панели для перехода
+        window.history.pushState( {panel: name}, name ); // Создаём новую запись в истории браузера
+        setActivePanel( name ); // Меняем активную панель
+        history.push( name ); // Добавляем панель в историю
+    }
+
+    useEffect(() => {
+        window.addEventListener('popstate', () => goBack());
+    }, [])
+
     return (
-        <Panel id={props.id}>
-            <PanelHeader>
-                Рандом
-            </PanelHeader>
-            <img src={rnd} id="rnd"/>
-
-            <div id="randomdiv">
-                {   place !== null && <div class="randomdata">
-                    <p>{place["name"]}</p>
-                    <p>{place["desc"]}</p>
-                    <p>Адрес - {place["address"]}</p>
-                    <p>Средняя цена - {place["cost"]}</p>
-                    <p>Станция метро - {place["metro"]}</p>
-                    <p class="ic"><SvgSelector id='link'/><Button id="c-button"><a id="hyperlink" target="_blank" href={place["link"]}>Перейти</a></Button></p>
-                    </div>
-                }
-
-                <Button id="randbut" onClick={click}>Сгенерировать</Button>
-            </div>
-        </Panel>
+        <ConfigProvider scheme={scheme} isWebView={true}>
+            <AdaptivityProvider>
+                <AppRoot>
+                    <SplitLayout popout={popout}>
+                        <SplitCol>
+                            <View activePanel={activePanel} history={history}>
+                                <Home id='home' fetchedUser={fetchedUser} go={go} />
+                                <Random id='random' go={go} fetchedUser={fetchedUser} />
+                                <DateGuide id='dg' go={go} fetchedUser={fetchedUser} />
+                                <Kudago id='kudago' go={go} fetchedUser={fetchedUser} />
+                                <Photo id='photo' go={go} fetchedUser={fetchedUser} />
+                            </View>
+                            <PanelHeaderBack onClick={() => window.history.back()}/>
+                        </SplitCol>
+                        <Slider go={changePanel}/>
+                    </SplitLayout>
+                </AppRoot>
+            </AdaptivityProvider>
+        </ConfigProvider>
     );
 }
+
+export default App;

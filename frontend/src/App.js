@@ -14,6 +14,7 @@ const App = () => {
 	const [activePanel, setActivePanel] = useState('home');
 	const [fetchedUser, setUser] = useState(null);
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
+	const [history, setHistory] = useState(['home'])
 
 	useEffect(() => {
 		bridge.subscribe(({ detail: { type, data }}) => {
@@ -30,29 +31,44 @@ const App = () => {
 		fetchData();
 	}, []);
 
-	function changePanel(name){
-		setActivePanel(name);
-	}
-
 	const go = e => {
 		setActivePanel(e.currentTarget.dataset.to);
 	};
 
+	const goBack = () => {
+		if( history.length === 1 ) {  // Если в массиве одно значение:
+			bridge.send("VKWebAppClose", {"status": "success"}); // Отправляем bridge на закрытие сервиса.
+		} else if( history.length > 1 ) { // Если в массиве больше одного значения:
+			history.pop() // удаляем последний элемент в массиве.
+			setActivePanel( history[history.length - 1] ) // Изменяем массив с иторией и меняем активную панель.
+		}
+	}
+	function goToPage( name ) { // В качестве аргумента принимаем id панели для перехода
+		window.history.pushState( {panel: name}, name ); // Создаём новую запись в истории браузера
+		setActivePanel( name ); // Меняем активную панель
+		history.push( name ); // Добавляем панель в историю
+	}
+
+	useEffect(() => {
+		window.addEventListener('popstate', () => goBack());
+	}, [])
+
 	return (
-		<ConfigProvider scheme={scheme}>
+		<ConfigProvider scheme={scheme} isWebView={true}>
 			<AdaptivityProvider>
 				<AppRoot>
 					<SplitLayout popout={popout}>
 						<SplitCol>
-							<View activePanel={activePanel}>
+							<View activePanel={activePanel} history={history}>
 								<Home id='home' fetchedUser={fetchedUser} go={go} />
 								<Random id='random' go={go} fetchedUser={fetchedUser} />
 								<DateGuide id='dg' go={go} fetchedUser={fetchedUser} />
 								<Kudago id='kudago' go={go} fetchedUser={fetchedUser} />
 								<Photo id='photo' go={go} fetchedUser={fetchedUser} />
 							</View>
+
 						</SplitCol>
-						<Slider go={changePanel}/>
+						<Slider go={go}/>
 					</SplitLayout>
 				</AppRoot>
 			</AdaptivityProvider>
