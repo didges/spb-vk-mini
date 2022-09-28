@@ -71,17 +71,15 @@ export default function Photo (props) {
     return (
         <Panel id={props.id}>
             {back === false &&
-                <PanelHeader>
-                    <PanelHeaderBack onClick={() => window.history.back()}/>
+                <PanelHeader before={<PanelHeaderBack onClick={() => window.history.back()}/>}>
                     Идеи для 📷
                 </PanelHeader>
             }
             {back === true &&
                 <PanelHeader
-
+                    before={<PanelHeaderBack onClick={() => window.history.back()}/>}
                     left={<PanelHeaderBack onClick={goBack} data-to="home"/>}
                 >
-                    <PanelHeaderBack onClick={() => window.history.back()}/>
                     Идеи для 📷
                 </PanelHeader>
             }

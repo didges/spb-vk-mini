@@ -8,8 +8,7 @@ import main_page from '../background/main_page.png'
 
 const Home = ({ id, go, fetchedUser }) => (
 	<Panel id={id}>
-	<PanelHeader>
-		<PanelHeaderBack onClick={() => window.history.back()}/>
+	<PanelHeader before={<PanelHeaderBack onClick={() => window.history.back()}/>}>
         Главная
     </PanelHeader>
 

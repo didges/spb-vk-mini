@@ -32,8 +32,7 @@ export default function Kudago (props) {
     }, [])
     return (
         <Panel id={props.id}>
-            <PanelHeader>
-                <PanelHeaderBack onClick={() => window.history.back()}/>
+            <PanelHeader before={<PanelHeaderBack onClick={() => window.history.back()}/>}>
                 Афиша
             </PanelHeader>
             <div class="photodiv">

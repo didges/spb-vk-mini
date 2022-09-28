@@ -14,7 +14,7 @@ const App = () => {
 	const [activePanel, setActivePanel] = useState('home');
 	const [fetchedUser, setUser] = useState(null);
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
-	const [history, setHistory] = useState(['home'])
+	const [history, setHistory] = useState(['home']) // Заносим начальную панель в массив историй.
 
 	useEffect(() => {
 		bridge.subscribe(({ detail: { type, data }}) => {
@@ -31,6 +31,10 @@ const App = () => {
 		fetchData();
 	}, []);
 
+	function changePanel(name){
+		setActivePanel(name);
+	}
+
 	const go = e => {
 		setActivePanel(e.currentTarget.dataset.to);
 	};
@@ -43,15 +47,15 @@ const App = () => {
 			setActivePanel( history[history.length - 1] ) // Изменяем массив с иторией и меняем активную панель.
 		}
 	}
+	useEffect(() => {
+		window.addEventListener('popstate', () => goBack());
+	}, [])
+
 	function goToPage( name ) { // В качестве аргумента принимаем id панели для перехода
 		window.history.pushState( {panel: name}, name ); // Создаём новую запись в истории браузера
 		setActivePanel( name ); // Меняем активную панель
 		history.push( name ); // Добавляем панель в историю
-	}
-
-	useEffect(() => {
-		window.addEventListener('popstate', () => goBack());
-	}, [])
+	};
 
 	return (
 		<ConfigProvider scheme={scheme} isWebView={true}>
@@ -59,16 +63,15 @@ const App = () => {
 				<AppRoot>
 					<SplitLayout popout={popout}>
 						<SplitCol>
-							<View activePanel={activePanel} history={history}>
-								<Home id='home' fetchedUser={fetchedUser} go={go} />
-								<Random id='random' go={go} fetchedUser={fetchedUser} />
-								<DateGuide id='dg' go={go} fetchedUser={fetchedUser} />
-								<Kudago id='kudago' go={go} fetchedUser={fetchedUser} />
-								<Photo id='photo' go={go} fetchedUser={fetchedUser} />
+							<View activePanel={activePanel}>
+								<Home id='home' fetchedUser={fetchedUser} go={goToPage} />
+								<Random id='random' go={goToPage} fetchedUser={fetchedUser} />
+								<DateGuide id='dg' go={goToPage} fetchedUser={fetchedUser} />
+								<Kudago id='kudago' go={goToPage} fetchedUser={fetchedUser} />
+								<Photo id='photo' go={goToPage} fetchedUser={fetchedUser} />
 							</View>
-
 						</SplitCol>
-						<Slider go={go}/>
+						<Slider go={changePanel}/>
 					</SplitLayout>
 				</AppRoot>
 			</AdaptivityProvider>

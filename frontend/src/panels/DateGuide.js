@@ -14,8 +14,7 @@ function start(){
 
     return (
         <Panel id={props.id}>
-            <PanelHeader>
-                <PanelHeaderBack onClick={() => window.history.back()}/>
+            <PanelHeader before={<PanelHeaderBack onClick={() => window.history.back()}/>}>
                 Выбор гида
             </PanelHeader>
             <div>
