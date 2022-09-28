@@ -2,6 +2,7 @@ import React, {useEffect, useState}from 'react';
 import {Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar, PanelHeaderBack} from '@vkontakte/vkui';
 import IdeasGrid from "./Grid/IdeasGrid";
 import './gridstyles.css'
+import { TailSpin } from 'react-loader-spinner';
 
 export default function Photo (props) {
     const [places, setPlaces] = useState(null);
@@ -75,9 +76,7 @@ export default function Photo (props) {
     return (
         <Panel id={props.id}>
             {back === false &&
-                <PanelHeader
-                    left={<PanelHeaderBack onClick={props.go} data-to="home"/>}
-                >
+                <PanelHeader>
                     Идеи для фотографии
                 </PanelHeader>
             }
@@ -91,8 +90,8 @@ export default function Photo (props) {
 
             <div class="photodiv">
                 {places === null && photo === null &&
-                    <div>
-                        подождите
+                    <div className="loader">
+                        <TailSpin color="#067185"/>
                     </div>
                 }
                 {places !== null &&

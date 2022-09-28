@@ -10,14 +10,19 @@
 .randomdata {
     text-align: center;
     border: 3px solid black;
+    margin: 1em;
+    padding: 1em;
     border-radius: 25px;
     box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .1);
 }
 
 #randbut:nth-of-type(1) {
-    position: fixed;
-    left: 400px;
-    top: 205px;
+    position: absolute;
+    background: #3e3e3e;
+    color: white;
+    left: 10%;
+    top: 280px;
+    width: 536px;
 }
 
 
@@ -29,3 +34,26 @@
     z-index: 3;
 }
 
+#c-button {
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #bdbebd;
+  color: black;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  font-size: 16px;
+  margin-left: 3px;
+}
+
+#hyperlink {
+    text-decoration: none;
+    color: black;
+}
+
+.ic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

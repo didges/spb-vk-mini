@@ -32,9 +32,7 @@ export default function Kudago (props) {
     }, [])
     return (
         <Panel id={props.id}>
-            <PanelHeader
-                left={<PanelHeaderBack onClick={props.go} data-to="home"/>}
-            >
+            <PanelHeader>
                 Афиша
             </PanelHeader>
             <div class="photodiv">
