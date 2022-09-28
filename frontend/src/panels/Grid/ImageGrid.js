@@ -13,7 +13,7 @@ const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    height: 305,
+
     marginBottom: 10,
     marginTop: 10,
     marginLeft: 10,
@@ -61,7 +61,6 @@ export default function ImageGrid(props){
                                 <p id="itemtext">{props.data[index]["name"]}</p>
                                 <img src={data[index]["image"]} width={280} height={170}/>
                                 <div id="divsvgtext">
-                                    <SvgSelector id='link'/>
                                     <p class="ic"><Button id="c-button" ><a id="hyperlink" target="_blank" href={props.data[index]["link"]}>Перейти</a></Button></p>
                                 </div>
                         </Item>

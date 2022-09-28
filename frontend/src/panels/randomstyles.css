@@ -4,9 +4,8 @@
 }
 
 .randomdata {
-    padding-left: 5px;
-    padding-right: 5px;
-    margin-top: 5px;
+    padding: 0.5em;
+    margin: 0.6em;
     text-align: center;
     border: 3px solid black;
     border-radius: 25px;
@@ -30,7 +29,7 @@
     z-index: 3;
 }
 
-#c-button {
+#cbutton {
   appearance: none;
   border: 0;
   border-radius: 5px;
@@ -38,18 +37,24 @@
   color: black;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
   font-size: 16px;
-  margin-left: 3px;
+  height: 35px;
 }
 
 #hyperlink {
     text-decoration: none;
     color: black;
+    align-items: center;
+    justify-content: center;
 }
 
-.ic {
+#icp {
     display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#svgdiv {
     align-items: center;
     justify-content: center;
 }

@@ -6,7 +6,7 @@
 
 #c-button {
   appearance: none;
-
+  text-transform: none;
   border-radius: 5px;
   background: #bdbebd;
   color: black;
