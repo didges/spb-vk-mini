@@ -2,28 +2,32 @@
 
     background-color: #D1DBEA;
 
-    a {
-      outline: none;
-      text-decoration: none;
-      padding: 2px 1px 0;
-    }
-
-    a:link {
-      color: blue;
-    }
-
-    a:visited {
-      color: purple;
-    }
-
-    a:focus, a:hover {
-      border-bottom: 1px solid;
-    }
-
-    a:active {
-      color: red;
-    }
 }
+
+#c-button {
+  appearance: none;
+
+  border-radius: 5px;
+  background: #bdbebd;
+  color: black;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  font-size: 14px;
+  margin-left: 1px;
+}
+
+#hyperlink {
+    text-decoration: none;
+    color: black;
+}
+
+.ic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .invisible{
     height: 80px;
@@ -31,6 +35,18 @@
 
 .loader {
     min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#itemtext {
+    color: black;
+    font-size: 14px;
+}
+
+#divsvgtext{
     display: flex;
     align-items: center;
     justify-content: center;

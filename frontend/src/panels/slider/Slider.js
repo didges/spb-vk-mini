@@ -23,7 +23,7 @@ export default function Slider({go}){
     return(
         <div class="slider">
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} >
-                <BottomNavigation sx={{ width: 400 , height:80}} value={value} onChange={handleChange} >
+                <BottomNavigation value={value} onChange={handleChange} >
                     <BottomNavigationAction
                         label="Главная"
                         value="home"

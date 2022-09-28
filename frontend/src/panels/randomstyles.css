@@ -15,7 +15,10 @@
 
 #randbut:nth-of-type(1) {
     position: absolute;
-    left: 55%;
+    background: #3e3e3e;
+    color: white;
+    left: 5%;
+    width: 90%;
     top: 45%;
 }
 
@@ -27,3 +30,26 @@
     z-index: 3;
 }
 
+#c-button {
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #bdbebd;
+  color: black;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  font-size: 16px;
+  margin-left: 3px;
+}
+
+#hyperlink {
+    text-decoration: none;
+    color: black;
+}
+
+.ic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

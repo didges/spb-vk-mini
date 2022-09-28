@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar, PanelHeaderBack} from '@vkontakte/vkui';
 import "./randomstyles.css";
 import rnd from '../background/randomstart.png'
+import {SvgSelector} from './slider/SvgSelector'
 
 function changeBgImg(){
     var img = document.getElementById('rnd');
@@ -11,7 +12,6 @@ function changeBgImg(){
     block.style.minHeight = '100vh';
     var but = document.getElementById('randbut');
     but.style.position = 'relative';
-    but.style.left = '135px';
     but.style.top = '25px';
 }
 
@@ -35,8 +35,8 @@ export default function Random (props) {
     }
     return (
         <Panel id={props.id}>
-            <PanelHeader left={<PanelHeaderBack onClick={props.go} data-to="home"/>}>
-                Рандомное место
+            <PanelHeader>
+                Рандом
             </PanelHeader>
             <img src={rnd} id="rnd"/>
 
@@ -47,7 +47,7 @@ export default function Random (props) {
                     <p>Адрес - {place["address"]}</p>
                     <p>Средняя цена - {place["cost"]}</p>
                     <p>Станция метро - {place["metro"]}</p>
-                    <p>Ссылка - <a target="_blank" href={place["link"]}>{place["link"]}</a></p>
+                    <p class="ic"><SvgSelector id='link'/><Button id="c-button"><a id="hyperlink" target="_blank" href={place["link"]}>Перейти</a></Button></p>
                     </div>
                 }
 

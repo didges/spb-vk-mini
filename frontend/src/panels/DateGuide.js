@@ -14,16 +14,14 @@ function start(){
 
     return (
         <Panel id={props.id}>
-            <PanelHeader
-                left={<PanelHeaderBack onClick={props.go} data-to="home"/>}
-            >
+            <PanelHeader>
                 Выбор гида
             </PanelHeader>
             <div>
                 {startGuide !== true &&
                     <div>
                         <img src={dg} alt="dg" class="dgphoto"/>
-                        <Button onClick={start} className="buttonGuide">
+                        <Button onClick={start} id="buttonGuide">
                             Начнем
                         </Button>
                     </div>

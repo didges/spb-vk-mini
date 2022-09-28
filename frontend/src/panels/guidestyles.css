@@ -3,8 +3,11 @@
  height: auto;
 }
 
-.buttonGuide{
+#buttonGuide{
     position: absolute;
-    left: 67%;
+    background: #3e3e3e;
+    color: white;
+    left: 5%;
+    width: 90%;
     top: 48%;
 }
