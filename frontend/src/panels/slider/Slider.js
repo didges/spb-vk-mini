@@ -21,13 +21,8 @@ export default function Slider(props){
     }
     return(
         <div class="slider">
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} >
-                <BottomNavigation value={props.value} onChange={handleChange} >
-                    <BottomNavigationAction
-                        label="Главная"
-                        value="home"
-                        icon={<HomeIcon />}
-                    />
+            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0}} >
+                <BottomNavigation sx={{ width: '100%'}} value={props.value} onChange={handleChange} >
                     <BottomNavigationAction
                         label="Гид"
                         value="dg"

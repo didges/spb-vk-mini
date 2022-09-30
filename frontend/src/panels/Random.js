@@ -47,11 +47,7 @@ export default function Random (props) {
                     <p>Адрес - {place["address"]}</p>
                     <p>Средняя цена - {place["cost"]}</p>
                     <p>Станция метро - {place["metro"]}</p>
-                    <p id='icp'>
-                        <Button id="cbutton">
-                            <a id="hyperlink" target="_blank" href={place["link"]}>Перейти</a>
-                        </Button>
-                    </p>
+                    <p class="ic"><Button id="c-button"><a id="hyperlink" target="_blank" href={place["link"]}><span id="tbtn">Перейти</span> <span class="iconr"></span></a></Button></p>
                 </div>
                 }
 
