@@ -17,9 +17,9 @@
 .pro-sidebar {
     color: #adadad;
     height: 100vh;
-    width: 80px;
-    min-width: 90px;
-    text-align: left;
+    width: 90px;
+
+    text-align: center;
 
     transition: width, left, right, 0.3s;
     position: relative;

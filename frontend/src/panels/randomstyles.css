@@ -21,7 +21,7 @@
     background: #3e3e3e;
     color: white;
     left: 10%;
-    top: 280px;
+    top: 295px;
     width: 536px;
 }
 
@@ -40,11 +40,12 @@
   border-radius: 5px;
   background: #bdbebd;
   color: black;
+
+  font-size: 16px;
+  text-transform: none;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
-  font-size: 16px;
-  margin-left: 3px;
+  height: 40px;
 }
 
 #hyperlink {
@@ -52,8 +53,20 @@
     color: black;
 }
 
-.ic {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#icon {
+    background: url("./icons8-external-link-20.svg") no-repeat;
+    float: right;
+    margin-left: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+
+.iconr {
+    background: url("./icons8-external-link-20.svg") no-repeat;
+    float: right;
+    margin-bottom: 6px;
+    margin-left: 5px;
+    width: 20px;
+    height: 20px;
 }

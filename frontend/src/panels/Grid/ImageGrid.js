@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import React, {useState} from "react";
-import {SvgSelector} from '../slider/SvgSelector'
 import '../gridstyles.css'
 import { Button } from '@mui/material';
 
@@ -60,10 +59,7 @@ export default function ImageGrid(props){
                         <Item>
                                 <p id="itemtext">{props.data[index]["name"]}</p>
                                 <img src={data[index]["image"]} width={230} height={160}/>
-                                <SvgSelector id='link' class="svglink"/>
-                                <div id="divsvgtext">
-                                    <p class="ic"><Button id="c-button" ><a id="hyperlink" target="_blank" href={props.data[index]["link"]}>Перейти</a></Button></p>
-                                </div>
+                                <p class="ic"><a id="hyperlink" target="_blank" href={props.data[index]["link"]}><Button id="c-button" >Перейти<span id="icon"></span></Button></a></p>
                         </Item>
                     </Grid>
                 ))}

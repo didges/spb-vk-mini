@@ -42,7 +42,7 @@ export default function Random (props) {
                     <p>Адрес - {place["address"]}</p>
                     <p>Средняя цена - {place["cost"]}</p>
                     <p>Станция метро - {place["metro"]}</p>
-                    <p class="ic"><SvgSelector id='link'/><Button id="c-button"><a id="hyperlink" target="_blank" href={place["link"]}>Перейти</a></Button></p>
+                    <p class="ic"><a id="hyperlink" target="_blank" href={place["link"]}><Button id="c-button"><span id="tbtn">Перейти</span> <span class="iconr"></span></Button></a></p>
                     </div>
                 }
 

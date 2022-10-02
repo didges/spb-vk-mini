@@ -9,6 +9,7 @@
     color: #7с7с7с;
     font-family: monospace;
     font-size: 15px;
+    text-align: center;
     white-space: nowrap;
     overflow: hidden;
     border-right: 4px solid orange;
@@ -35,6 +36,10 @@
 
 #backbut {
     margin-left: 5px;
+}
+
+#forwardbut {
+    margin-left: 10px;
 }
 
 .selectform {
