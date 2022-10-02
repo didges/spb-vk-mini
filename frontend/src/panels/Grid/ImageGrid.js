@@ -59,7 +59,7 @@ export default function ImageGrid(props){
                         <Item>
                                 <p id="itemtext">{props.data[index]["name"]}</p>
                                 <img src={data[index]["image"]} width={280} height={170}/>
-                                <p class="ic"><Button id="c-button" ><a id="hyperlink" target="_blank" href={props.data[index]["link"]}>Перейти<span id="icon"></span></a></Button></p>
+                                <p class="ic"><a id="hyperlink" target="_blank" href={props.data[index]["link"]}><Button id="c-button" >Перейти<span id="icon"></span></Button></a></p>
                         </Item>
                     </Grid>
                 ))}

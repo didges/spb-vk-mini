@@ -5,10 +5,11 @@
 }
 
 .title{
-    width: 280px;
+    width: 240px;
     color: #7c7c7c;
     font-family: monospace;
-    font-size: 17px;
+    font-size: 14px;
+    text-align: center;
     white-space: nowrap;
     overflow: hidden;
     border-right: 4px solid orange;
@@ -35,6 +36,10 @@
 
 #backbut{
     margin-left: 5px;
+}
+
+#forwardbut {
+    margin-left: 10px;
 }
 
 .dgframe{

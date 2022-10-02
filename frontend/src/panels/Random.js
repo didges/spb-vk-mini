@@ -47,11 +47,12 @@ export default function Random (props) {
                     <p>Адрес - {place["address"]}</p>
                     <p>Средняя цена - {place["cost"]}</p>
                     <p>Станция метро - {place["metro"]}</p>
-                    <p class="ic"><Button id="c-button"><a id="hyperlink" target="_blank" href={place["link"]}><span id="tbtn">Перейти</span> <span class="iconr"></span></a></Button></p>
+                    <p class="ic"><a id="hyperlink" target="_blank" href={place["link"]}><Button id="c-button"><span id="tbtn">Перейти</span> <span class="iconr"></span></Button></a></p>
                 </div>
                 }
 
                 <Button id="randbut" onClick={click}>Сгенерировать</Button>
+                <div class="invisible"></div>
             </div>
         </Panel>
     );

@@ -4,6 +4,13 @@ import IdeasGrid from "./Grid/IdeasGrid";
 import './gridstyles.css'
 import { TailSpin } from 'react-loader-spinner';
 
+function backToTop() {
+    if (window.pageYOffset > 0) {
+      window.scrollBy(0, -80);
+      setTimeout(backToTop, 0);
+    }
+}
+
 export default function Photo (props) {
     const [places, setPlaces] = useState(null);
     const [photo, setPhoto] = useState(null);
@@ -61,6 +68,7 @@ export default function Photo (props) {
                 values.push(tmp);
             }
             console.log(values)
+            backToTop();
             setPhoto(values);
             setPlaces(null);
         })
@@ -96,6 +104,7 @@ export default function Photo (props) {
                 }
                 {photo !== null &&
                     <div>
+                        <p><a name="top"></a></p>
                         <IdeasGrid data={photo} ex={true}/>
                     </div>
                 }

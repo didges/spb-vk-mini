@@ -17,7 +17,7 @@ const quest = [
         "type": 1
     },
     {
-        "question": "Люблю активный отдых. А ты?",
+        "question": "Какой ты любишь отдых?",
         "type": 2
     },
     {
@@ -192,7 +192,7 @@ export default function Questions() {
                     <div className="wrapper">
                         <h1 className="title"> {quest[iterator]['question']}</h1>
                     </div>
-                    <Button stretched={false} onClick={next_answer}> Ответить</Button>
+                    <Button id="forwardbut" stretched={false} onClick={next_answer}> Ответить</Button>
                     {iterator !== 0 &&
                         <Button id="backbut" stretched={false} onClick={back}> Назад</Button>
                     }
@@ -232,13 +232,13 @@ export default function Questions() {
 
                             {iterator === 5 &&
                                 <div>
-                                    <Button onClick={choose_word}> Подтвердить</Button>
+                                    <Button id="forwardbut" onClick={choose_word}> Подтвердить</Button>
                                     <Button id="backbut" stretched={false} onClick={back}> Назад</Button>
                                 </div>
                             }
                             {iterator !== 5 &&
                                 <div>
-                                    <Button onClick={next_quest}> Подтвердить</Button>
+                                    <Button id="forwardbut" onClick={next_quest}> Подтвердить</Button>
                                     <Button id="backbut" stretched={false} onClick={back}> Назад</Button>
                                 </div>
                             }
