@@ -12,7 +12,9 @@ function backToTop() {
 }
 
 export default function Photo (props) {
-    const [places, setPlaces] = useState(null);
+    let places = props.palces;
+    const setPlaces = props.setPlaces
+    //const [places, setPlaces] = useState(null);
     const [photo, setPhoto] = useState(null);
     const [back , setBack] = useState(true);
 
