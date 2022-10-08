@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Button, FormItem, Checkbox} from "@vkontakte/vkui";
+import {Button, FormItem, Checkbox, CustomSelect} from "@vkontakte/vkui";
 import Select from "react-select";
 import axios from "axios";
 import './textAnimation.css'
@@ -35,11 +35,6 @@ const quest = [
         "type": 1
     }
 ]
-
-
-
-
-
 
 export default function Questions() {
     const [isAnswer, setIsAnswer] = useState(false);
@@ -86,9 +81,9 @@ export default function Questions() {
     function choose_word(){
         if (word !== null){
             setViewPDF(true);
-            console.log(word)
+            console.log('word', word)
             let require = {
-                "word": word["label"]
+                "word": word
             }
             fetch('https://devteamapp.space/get_date_by_word', {
                 method: "POST",
@@ -108,12 +103,13 @@ export default function Questions() {
     function request_date_words(){
         console.log('in request')
         let value_for_req = {
-            "money": money,
-            "district": district,
+            "money": {"value":money,"label":money},
+            "district": {"value":district,"label":district},
             "relax": relax,
-            "long": long,
-            "count": count
+            "long": {"value":long,"label":long},
+            "count": {"value":count,"label":count}
         }
+        console.log("value_for_req", value_for_req)
         console.log(`value_for_req = ${JSON.stringify(value_for_req)}`)
         fetch('https://devteamapp.space/dates_words', {
             method: "POST",
@@ -198,7 +194,10 @@ export default function Questions() {
                         <h1 className="title"> {quest[iterator]['question']}</h1>
                     </div>
                     <Button id="forwardbut" stretched={false} onClick={next_answer}> Ответить</Button>
-                    <Button id="backbut" stretched={false} onClick={back}> Назад</Button>
+                    {iterator !== 0 &&
+                        <Button id="backbut" stretched={false} onClick={back}> Назад</Button>
+                    }
+
                 </div>
             )
 
@@ -214,6 +213,12 @@ export default function Questions() {
                     tmp_ans = quest[iterator]["answers"];
                 }
                 console.log("tmp", iterator, tmp_ans);
+                /*
+                value_for_req = {"money":"около 1000 рублей","district":"Центральный","relax":["Интерактивный","Релакс"],"long":"4 часа","count":"Пара"}
+                onChange={(e) => setSelectedOption[iterator](e.target.value)}
+                value_for_req = {"money":{"value":"около 1000 рублей","label":"около 1000 рублей"},"district":{"value":"Петроградский","label":"Петроградский"},"relax":["Интерактивный","Релакс","Семейный"],"long":{"value":"2 часа","label":"2 часа"},"count":{"value":"Пара","label":"Пара"}}
+                 */
+
                 if (tmp_ans === null) {
                     return (
                         <div>
@@ -224,13 +229,16 @@ export default function Questions() {
                     return (
                         <div style={{minWidth: 100}}>
                             <FormItem top={quest[iterator]['question']}>
-                                <Select
+                                <CustomSelect
+                                    placeholder="Не задан"
                                     className="selectform"
-                                    defaultValue={selectedOption[iterator]}
-                                    onChange={setSelectedOption[iterator]}
+                                    onChange={(e) => {
+                                        setSelectedOption[iterator](e.target.value)
+                                    }}
                                     options={tmp_ans}
                                 />
                             </FormItem>
+
                             {iterator === 5 &&
                                 <div>
                                     <Button id="forwardbut" onClick={choose_word}> Подтвердить</Button>
@@ -304,17 +312,12 @@ export default function Questions() {
         } else{
             return (
                 <div>
-                    <iframe src={url} width="666" height="550" allow="autoplay"/>
+                    <iframe src={url} width="666" height="550"  allow="autoplay"/>
                     <Button onClick={restart}> Начать с начала</Button>
                 </div>
 
             )
         }
     }
-
-
-
-
-
 
 }
