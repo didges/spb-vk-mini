@@ -81,9 +81,9 @@ export default function Questions() {
     function choose_word(){
         if (word !== null){
             setViewPDF(true);
-            console.log(word)
+            console.log('word', word)
             let require = {
-                "word": word["label"]
+                "word": word
             }
             fetch('https://devteamapp.space/get_date_by_word', {
                 method: "POST",
