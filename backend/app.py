@@ -46,7 +46,7 @@ def get_date_words():
         dates = filter_duration(dates, desc, long)
         dates = filter_count(dates, desc, count)
         dates = definition_word(dates)
-
+    dates = list(set(dates))
     res = {}
     for i, data in enumerate(dates):
         res[i] = {"value": desc[data]['word'], "label": desc[data]['word']}
