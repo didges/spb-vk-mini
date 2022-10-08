@@ -6,49 +6,46 @@ import { TailSpin } from 'react-loader-spinner';
 
 function backToTop() {
     if (window.pageYOffset > 0) {
-      window.scrollBy(0, -80);
-      setTimeout(backToTop, 0);
+        window.scrollBy(0, -80);
+        setTimeout(backToTop, 0);
     }
 }
 
 export default function Photo (props) {
-    let places = props.palces;
-    const setPlaces = props.setPlaces
-    //const [places, setPlaces] = useState(null);
-    const [photo, setPhoto] = useState(null);
-    const [back , setBack] = useState(true);
+    const [places, setPlaces] = useState(null);
+
 
     function goBack(){
-        setBack(!back);
+        props.setBack(!props.back);
 
-            fetch('https://devteamapp.space/get_main_img', {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
+        fetch('https://devteamapp.space/get_main_img', {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(function(response) {
+            return response.json();
+        }).then(function(data) {
+            console.log(data)
+            let keys = Object.keys(data);
+            let values = []
+            for (let i = 0; i < keys.length; i++){
+                let tmp = {
+                    "name": keys[i],
+                    "image": "https://devteamapp.space/get_photo/"+data[keys[i]],
+                    "link": "https://devteamapp.space/get_place_images/"+keys[i]+"/place"
                 }
-            }).then(function(response) {
-                return response.json();
-            }).then(function(data) {
-                console.log(data)
-                let keys = Object.keys(data);
-                let values = []
-                for (let i = 0; i < keys.length; i++){
-                    let tmp = {
-                        "name": keys[i],
-                        "image": "https://devteamapp.space/get_photo/"+data[keys[i]],
-                        "link": "https://devteamapp.space/get_place_images/"+keys[i]+"/place"
-                    }
-                    values.push(tmp);
-                }
+                values.push(tmp);
+            }
 
-                setPlaces(values);
-                setPhoto(null);
-            })
+            setPlaces(values);
+            props.setPhoto(null);
+        })
     }
 
 
     function setter(link){
-        setBack(!back);
+        props.setBack(!props.back);
         console.log(link)
         fetch(link, {
             method: "POST",
@@ -71,21 +68,24 @@ export default function Photo (props) {
             }
             console.log(values)
             backToTop();
-            setPhoto(values);
-            setPlaces(null);
+            props.setPhoto(values);
+            props.goToPage('photo');
         })
     }
     useEffect(() =>{
-       goBack();
+        goBack();
     }, [])
+
+
+    console.log('props.photo', props.photo)
     return (
         <Panel id={props.id}>
-            {back === false &&
+            {props.back === false &&
                 <PanelHeader>
                     Идеи для 📷
                 </PanelHeader>
             }
-            {back === true &&
+            {props.back === true &&
                 <PanelHeader
                     left={<PanelHeaderBack onClick={goBack} data-to="home"/>}
                 >
@@ -94,23 +94,23 @@ export default function Photo (props) {
             }
 
             <div class="photodiv">
-                {places === null && photo === null &&
+                {places === null && props.photo === null &&
                     <div className="loader">
                         <TailSpin color="#067185"/>
                     </div>
                 }
-                {places !== null &&
+                {places !== null && props.photo === null &&
                     <div>
                         <IdeasGrid data={places} setter={setter} ex={false}/>
                     </div>
                 }
-                {photo !== null &&
+                {props.photo !== null &&
                     <div>
                         <p><a name="top"></a></p>
-                        <IdeasGrid data={photo} ex={true}/>
+                        <IdeasGrid data={props.photo} ex={true}/>
                     </div>
                 }
-            <div class="invisible"></div>
+                <div class="invisible"></div>
             </div>
         </Panel>
     );

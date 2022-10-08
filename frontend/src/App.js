@@ -16,6 +16,7 @@ const App = () => {
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
 	const [history, setHistory] = useState(['home']) // Заносим начальную панель в массив историй.
 	const [val, setVal] = useState('home');
+	const [back , setBack] = useState(true);
 	const [secondaryPhoto, setSecondaryPhoto] = useState(null);
 	useEffect(() => {
 		bridge.subscribe(({ detail: { type, data }}) => {
@@ -44,13 +45,15 @@ const App = () => {
 		if( history.length === 1 ) {  // Если в массиве одно значение:
 			bridge.send("VKWebAppClose", {"status": "success"}); // Отправляем bridge на закрытие сервиса.
 		} else if( history.length > 1 ) { // Если в массиве больше одного значения:
-			if (secondaryPhoto !== null){
+			console.log("sec", secondaryPhoto)
+				if (history[history.length - 1] === 'photo'){
+					setSecondaryPhoto(null);
+					setBack(!back);
+				}
 				history.pop() // удаляем последний элемент в массиве.
 				setActivePanel( history[history.length - 1] )
 				setVal(history[history.length - 1])
-			} else{
-				setSecondaryPhoto(false);
-			}
+
 			// Изменяем массив с иторией и меняем активную панель.
 		}
 	}
@@ -62,6 +65,15 @@ const App = () => {
 	useEffect(() => {
 		window.addEventListener('popstate', () => goBack());
 	}, [])
+
+	function addHist(name){
+		window.history.pushState( {panel: name}, name ); // Создаём новую запись в истории браузера
+		history.push( name ); // Добавляем панель в историю
+	}
+
+	function setToSetBack(back){
+		setBack(back)
+	}
 
 	function goToPage( name ) {
 		if (name !== val){
@@ -87,7 +99,7 @@ const App = () => {
 								<Random id='random' go={goToPage} fetchedUser={fetchedUser} />
 								<DateGuide id='dg' go={goToPage} fetchedUser={fetchedUser} />
 								<Kudago id='kudago' go={goToPage} fetchedUser={fetchedUser} />
-								<Photo id='photo' go={goToPage} fetchedUser={fetchedUser} palces={secondaryPhoto} setPlaces={photoSetter}/>
+								<Photo id='photo' go={goToPage} fetchedUser={fetchedUser} photo={secondaryPhoto} setPhoto={photoSetter} goToPage={addHist} back={back} setBack={setToSetBack}/>
 							</View>
 						</SplitCol>
 						<Slider go={goToPage} value={val}/>
